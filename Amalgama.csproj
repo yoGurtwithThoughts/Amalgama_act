@@ -177,12 +177,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Page Update="UserControls\Draver.xaml">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Page>
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="View\AdminPages\" />
   </ItemGroup>
 

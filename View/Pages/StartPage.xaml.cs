@@ -1,4 +1,4 @@
-﻿using Amalgama.UserControls;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -181,39 +181,6 @@ namespace Amalgama.View.Pages
             _contentIndex = (_contentIndex + 1) % _contentItems.Count;
         }
 
-
-        private void DraverButton_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            //if (Draver.Visibility != Visibility.Collapsed)
-            //{
-            //    // Скрываем меню
-            //    var transform = (TranslateTransform)Draver.RenderTransform;
-            //    var animation = new DoubleAnimation(-Draver.Width, TimeSpan.FromMilliseconds(300));
-            //    animation.Completed += (s, a) => Draver.Visibility = Visibility.Collapsed;
-            //    transform.BeginAnimation(TranslateTransform.XProperty, animation);
-            //}
-            //else
-            //{
-            //    // Показываем меню
-            //    Draver.Visibility = Visibility.Visible;
-            //    var transform = (TranslateTransform)Draver.RenderTransform;
-            //    transform.BeginAnimation(TranslateTransform.XProperty,
-            //        new DoubleAnimation(0, TimeSpan.FromMilliseconds(300)));
-            //}
-        }
-
-        private void Overlay_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            //var animation = new DoubleAnimation
-            //{
-            //    To = -250,
-            //    Duration = TimeSpan.FromSeconds(0.3),
-            //    EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseOut }
-            //};
-
-            //MenuTransform.BeginAnimation(TranslateTransform.XProperty, animation);
-            //Overlay.Visibility = Visibility.Collapsed;
-        }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
@@ -449,6 +416,11 @@ namespace Amalgama.View.Pages
         private void Close_MouseDown(object sender, MouseButtonEventArgs e)
         {
             Application.Current.Shutdown();
+        }
+
+        private void ToggleButton_Click(object sender, RoutedEventArgs e)
+        {
+            DrawerHost.IsRightDrawerOpen = !DrawerHost.IsRightDrawerOpen;
         }
 
         //private void ToggleMenu(bool open)

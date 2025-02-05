@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Amalgama.View.Pages"
       xmlns:svgc1="http://sharpvectors.codeplex.com/svgc"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
       Loaded="Page_Loaded"
       d:DesignHeight="450"
@@ -50,26 +51,32 @@
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
                     <Canvas>
-                        <!--<Border x:Name="Overlay"
-                Background="Black"
-                Opacity="0"
-                Visibility="Collapsed"
-                MouseDown="Overlay_MouseDown"
-                Grid.ColumnSpan="5"
-                Panel.ZIndex="1"/>-->
-                        <!--<Grid>
-                            <uc:Draver x:Name="MyDraver" Width="200"/>
-                        </Grid>-->
                         <!-- Кнопка открытия меню -->
-                        <StackPanel x:Name="DraverButton"
-                                    Orientation="Horizontal"
-                                    Grid.Column="1"
-                                    Canvas.Left="25"
-                                    Canvas.Top="7.5"
-                                    MouseDown="DraverButton_MouseDown"
-                                   >   
-                            <Image Source="/Images/dropMenuIcon.png" Height="25" Width="25"/>
-                        </StackPanel>
+                        <materialDesign:DrawerHost x:Name="DrawerHost">
+                            <materialDesign:DrawerHost.RightDrawerContent>
+                                <StackPanel>
+                                    <Border Height="500"
+                                            Background="White"
+                                            Width="200">
+                                        <StackPanel>
+                                            <Button Content="Item 1" Margin="16" Style="{StaticResource LightButton}"/>
+                                            <Button Content="Item 2" Margin="16" Style="{StaticResource LightButton}"/>
+                                            <Button Content="Item 3" Margin="16" Style="{StaticResource LightButton}"/>
+                                        </StackPanel>
+                                    </Border>
+                                </StackPanel>
+                            </materialDesign:DrawerHost.RightDrawerContent>
+                            <Grid>
+                                <materialDesign:ColorZone Padding="16" Mode="Inverted">
+                                    <DockPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <ToggleButton Style="{DynamicResource MaterialDesignHamburgerToggleButton}" 
+                                  Click="ToggleButton_Click"/>
+                                        </StackPanel>
+                                    </DockPanel>
+                                </materialDesign:ColorZone>
+                            </Grid>
+                        </materialDesign:DrawerHost>
                     </Canvas>
                 </Grid>
                 <Grid Grid.Row="1">
