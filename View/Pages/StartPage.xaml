@@ -1,0 +1,255 @@
+﻿<Page x:Class="Amalgama.View.Pages.StartPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Amalgama.View.Pages"
+      xmlns:svgc1="http://sharpvectors.codeplex.com/svgc"
+      mc:Ignorable="d" 
+      Loaded="Page_Loaded"
+      d:DesignHeight="450"
+      d:DesignWidth="800"
+      Title="StartPage">
+    <Border>
+        <Grid>
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <LinearGradientBrush.GradientStops>
+                        <GradientStop Color="#AFAEAE" Offset="0.0"/>
+                        <GradientStop Color="#DCDCDC" Offset="0.25"/>
+                        <GradientStop Color="#DCDCDC" Offset="0.5"/>
+                        <GradientStop Color="#DCDCDC" Offset="0.75"/>
+                        <GradientStop Color="#F2F2F2" Offset="1.0"/>
+                    </LinearGradientBrush.GradientStops>
+                </LinearGradientBrush>
+            </Grid.Background>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="35"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="650"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="35"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Grid.Background>
+                    <LinearGradientBrush StartPoint="0.5,0.5" EndPoint="0.5,0.5">
+                        <LinearGradientBrush.GradientStops>
+                            <GradientStop Color="#B8B8B8" Offset="0.15"/>
+                            <GradientStop Color="#DCDCDC" Offset="1.95"/>
+                        </LinearGradientBrush.GradientStops>
+                    </LinearGradientBrush>
+                </Grid.Background>
+                <Frame x:Name="LeftFrame" NavigationUIVisibility="Hidden">
+                </Frame>
+            </Grid>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="45"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Canvas>
+                        <!--<Border x:Name="Overlay"
+                Background="Black"
+                Opacity="0"
+                Visibility="Collapsed"
+                MouseDown="Overlay_MouseDown"
+                Grid.ColumnSpan="5"
+                Panel.ZIndex="1"/>-->
+                        <!--<Grid>
+                            <uc:Draver x:Name="MyDraver" Width="200"/>
+                        </Grid>-->
+                        <!-- Кнопка открытия меню -->
+                        <StackPanel x:Name="DraverButton"
+                                    Orientation="Horizontal"
+                                    Grid.Column="1"
+                                    Canvas.Left="25"
+                                    Canvas.Top="7.5"
+                                    MouseDown="DraverButton_MouseDown"
+                                   >   
+                            <Image Source="/Images/dropMenuIcon.png" Height="25" Width="25"/>
+                        </StackPanel>
+                    </Canvas>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <StackPanel Orientation="Vertical"
+                               VerticalAlignment="Bottom"
+                               Height="550"
+                               Width="200"
+                               HorizontalAlignment="Center"
+                               x:Name="AnimatedBlock"
+                               Opacity="0"
+                               RenderTransformOrigin="0.5,0.5">
+                        <StackPanel.RenderTransform>
+                            <TranslateTransform x:Name="TextBlockTranslateTransform" X="-50" Y="0" />
+                        </StackPanel.RenderTransform>
+                        <TextBlock Text="Тату салон"
+                                   Style="{StaticResource TitleMain}"></TextBlock>
+                        <Image Source="/Images/AMALGAMA.png" 
+                               Margin="0 7.5 0 0"/>
+                        <TextBlock Text="Профессиональные услуги
+                                         Студии 
+                                         татуировки 
+                                         в Туле"
+                                   Margin="17 5"
+                                   TextWrapping="Wrap"
+                                   Foreground="Black"
+                        Style="{StaticResource TitleMain}"/>
+                        <Button x:Name="SignButton"
+                                 Style="{StaticResource ButtonSt1}"
+                                 Content="ЗАПИСАТЬСЯ"
+                                 Click="SignButton_Click"
+                                 Margin="0 45 "
+                                 HorizontalAlignment="Left"/>
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Row="2">
+                    <StackPanel
+                        Margin="25 0 0 0"
+                        Orientation="Horizontal"
+                        Height="230"
+                        x:Name="moreButton"
+                        Opacity="0"
+                        RenderTransformOrigin="0.5,0.5">
+                        <StackPanel.RenderTransform>
+                            <TranslateTransform x:Name="MoreButtonTranslateTransform" X="-50" Y="0" />
+                        </StackPanel.RenderTransform>
+                        <Border x:Name="VK"
+                                MouseDown="VK_MouseDown"
+                                VerticalAlignment="Top" Height="41">
+                            <Image Source="/Images/black.png" 
+                               />
+                        </Border>
+                        <Border Width="7.8"></Border>
+                        <Border x:Name="TG"
+                           MouseDown="TG_MouseDown">
+                            <Image Source="/Images/black1.png" 
+                                   Height="41"
+                                   VerticalAlignment="Top"/>
+                        </Border>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Image Source="/Images/bannerbackground.png"
+                       Stretch="UniformToFill"
+                       x:Name="Animated_Background"
+                       Width="335"
+                       Opacity="0"
+                       RenderTransformOrigin="0.5,0.5" 
+                       Margin="158,0,157,0">
+                    <Image.RenderTransform>
+                        <TranslateTransform 
+                            x:Name="BackgroundTranslateTransform" X="0" Y="-50" />
+                    </Image.RenderTransform>
+                </Image>
+                <Border 
+                   Height="853"
+                   HorizontalAlignment="Center">
+                    <Image Source="/Images/mBanner.png" 
+                          VerticalAlignment="Top"
+                          x:Name="animated_Banner"
+                          HorizontalAlignment="Stretch"
+                          Opacity="0"
+                          RenderTransformOrigin="0.5,0.5">
+                        <Image.RenderTransform>
+                            <TranslateTransform x:Name="BannerTranslateTransform" X="0" Y="-50" />
+                        </Image.RenderTransform>
+                    </Image>
+                </Border>
+            </Grid>
+            <Grid Grid.Column="3">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="55"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="355"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Border x:Name="Animated_Service"
+                            RenderTransformOrigin="0.5,0.5"
+                            HorizontalAlignment="Center">
+                        <Border.RenderTransform>
+                            <TranslateTransform x:Name="Animatedbrd" X="0" Y="-150"/>
+                        </Border.RenderTransform>
+                        <StackPanel
+                            Orientation="Horizontal">
+                            <Button x:Name="Service_button"
+                                    Style="{StaticResource LightButton}"
+                                    Content="услуги"
+                                    Click="Service_button_Click"/>
+                            <Button x:Name="SButton"
+                                    Click="SButton_Click"
+                                    Style="{StaticResource ButtonSt1}"
+                                    Content="мастера"></Button>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <StackPanel Orientation="Vertical"
+                                x:Name="Contentstack"
+                                Height="450"
+                                Width="350"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center">
+                        <TextBlock x:Name="ContentTxt"/>
+                        <StackPanel.RenderTransform>
+                            <TranslateTransform x:Name="TextBlockTranslateTransform1" X="-50" Y="0" />
+                        </StackPanel.RenderTransform>
+                    </StackPanel>
+                    <StackPanel x:Name="DotsPanel" 
+                                HorizontalAlignment="Center" 
+                                VerticalAlignment="Bottom" 
+                                Orientation="Horizontal"
+                                Margin="0 20 0 0"
+                                Height="25" Width="Auto"/>
+                </Grid>
+                <Grid Grid.Row="2">
+                    <StackPanel HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                x:Name="Other">
+                        <StackPanel.RenderTransform>
+                            <TranslateTransform x:Name="TextBlockTranslateTransform3" X="-50" Y="0" />
+                        </StackPanel.RenderTransform>
+                        <TextBlock Style="{StaticResource ContentTitle}"
+                                   Text="ДОЛГО ЗАЖИВАЕТ?"/>
+                        <TextBlock Style="{StaticResource Content}"
+                                   Text="или не очень..."/>
+                        <TextBlock Style="{StaticResource ContentTitle}"
+                                   Text="СИЛЬНО БОЛЬНО?"/>
+                        <TextBlock Style="{StaticResource Content}"
+                                   Text="боязно..."/>
+                        <TextBlock Style="{StaticResource ContentTitle}"
+                                   Text="СКОЛЬКО СТОИТ?"/>
+                        <TextBlock Style="{StaticResource Content}"
+                                   Text="дорого наверное"/>
+                        <TextBlock Style="{StaticResource ContentTitle}"
+                                   Text="НЕТ 18 ЛЕТ?"/>
+                        <TextBlock Style="{StaticResource Content}"
+                                   Text="надежда есть?"/>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+            <Grid Grid.Column="4">
+                <Grid.Background>
+                    <LinearGradientBrush StartPoint="0.5,0.5" EndPoint="0.5,0.5">
+                        <LinearGradientBrush.GradientStops>
+                            <GradientStop Color="#B8B8B8" Offset="0.15"/>
+                            <GradientStop Color="#DCDCDC" Offset="1.95"/>
+                        </LinearGradientBrush.GradientStops>
+                    </LinearGradientBrush>
+                </Grid.Background>
+                <Image x:Name="Close"
+                       MouseDown="Close_MouseDown"
+                       Source="/Images/Closed.png"
+                       Height="15"
+                       Width="15"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Top"/>
+            </Grid>
+        </Grid>
+    </Border>
+</Page>

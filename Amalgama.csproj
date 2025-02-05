@@ -1,0 +1,189 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Fonts\bruno.ttf" />
+    <None Remove="Fonts\BrunoAce-Regular.ttf" />
+    <None Remove="Fonts\Jura.ttf" />
+    <None Remove="Images\AMALGAMA.png" />
+    <None Remove="Images\ArrowBackButton.png" />
+    <None Remove="Images\BackBanner.png" />
+    <None Remove="Images\bannerbackground.png" />
+    <None Remove="Images\BannerRegisterPage.png" />
+    <None Remove="Images\black.png" />
+    <None Remove="Images\black1.png" />
+    <None Remove="Images\Closed.png" />
+    <None Remove="Images\dropMenuIcon.png" />
+    <None Remove="Images\GalleryImagesPirsing\Bridge.jpg" />
+    <None Remove="Images\GalleryImagesPirsing\Noostrill.jpg" />
+    <None Remove="Images\GalleryImagesPirsing\NoseLang.jpg" />
+    <None Remove="Images\GalleryImagesPirsing\NosePirc.jpg" />
+    <None Remove="Images\GalleryImagesPirsing\OstinBar.jpg" />
+    <None Remove="Images\GalleryImagesPirsing\Septrill.jpg" />
+    <None Remove="Images\GalleryImagesPirsing\SeptumPirc.jpg" />
+    <None Remove="Images\Laura.jpg" />
+    <None Remove="Images\laura.png" />
+    <None Remove="Images\LeftImage.jpg" />
+    <None Remove="Images\mainBanner.png" />
+    <None Remove="Images\mBanner.png" />
+    <None Remove="Images\Nikita.jpg" />
+    <None Remove="Images\NIKITA.png" />
+    <None Remove="Images\PircBack.png" />
+    <None Remove="Images\PIRSING.png" />
+    <None Remove="Images\PIRSING1.png" />
+    <None Remove="Images\recBannerBack.png" />
+    <None Remove="Images\RemoveTatoo.png" />
+    <None Remove="Images\RightImage.png" />
+    <None Remove="Images\Slice1.png" />
+    <None Remove="Images\TATOO.png" />
+    <None Remove="Images\tattooremoval.png" />
+    <None Remove="Images\TBold.png" />
+    <None Remove="Images\y.png" />
+    <None Remove="Styles\TATOO REMOVAL.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\ArrowBackButton.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\BackBanner.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MaterialDesignThemes" Version="4.8.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.10" />
+    <PackageReference Include="SharpVectors" Version="1.8.4.2" />
+    <PackageReference Include="SharpVectors.Wpf" Version="1.8.4.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Fonts\bruno.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Fonts\BrunoAce-Regular.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Fonts\Jura.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\AMALGAMA.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\bannerbackground.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\BannerRegisterPage.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\black.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\black1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Closed.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\dropMenuIcon.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\GalleryImagesPirsing\Bridge.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\GalleryImagesPirsing\Noostrill.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\GalleryImagesPirsing\NoseLang.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\GalleryImagesPirsing\NosePirc.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\GalleryImagesPirsing\OstinBar.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\GalleryImagesPirsing\Septrill.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\GalleryImagesPirsing\SeptumPirc.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Laura.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\laura.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\LeftImage.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\mainBanner.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\mBanner.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Nikita.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\NIKITA.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\PircBack.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\PIRSING.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\PIRSING1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\recBannerBack.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\RemoveTatoo.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\RightImage.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Slice1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\TATOO.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\tattooremoval.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\TBold.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\y.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\TATOO REMOVAL.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UserControls\Draver.xaml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="View\AdminPages\" />
+  </ItemGroup>
+
+</Project>

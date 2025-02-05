@@ -1,0 +1,42 @@
+﻿<UserControl x:Class="Amalgama.UserControls.Draver"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Amalgama.UserControls"
+             mc:Ignorable="d" 
+             Height="auto"
+             Width="200">
+    <Grid Background="#FFFAFAFA">
+        <!-- Установите цвет фона -->
+        <Border>
+            <StackPanel Margin="10"
+                     VerticalAlignment="Center">
+                <Button Content="Галлерея" 
+                     x:Name="Gallery"
+                     Click="Gallery_Click" 
+                     Style="{StaticResource LightButton}" />
+                <Border Height="15"/>
+                <Button Content="Мастера" 
+                     x:Name="Masters"
+                     Click="Masters_Click" 
+                     Style="{StaticResource LightButton}" />
+                <Border Height="15"/>
+                <Button Content="Услуги" 
+                     x:Name="Servises"
+                     Click="Servises_Click" 
+                     Style="{StaticResource LightButton}" />
+                <Border Height="15"/>
+                <Button Content="Частые вопросы" 
+                   x:Name="Qw"
+                   Click="Qw_Click" 
+                   Style="{StaticResource LightButton}" />
+                <Border Height="15"/>
+                <Button Content="Запись" 
+                     x:Name="Record"
+                     Click="Record_Click" 
+                     Style="{StaticResource LightButton}" />
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>
