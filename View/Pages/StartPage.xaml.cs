@@ -420,32 +420,44 @@ namespace Amalgama.View.Pages
 
         private void ToggleButton_Click(object sender, RoutedEventArgs e)
         {
-            DrawerHost.IsRightDrawerOpen = !DrawerHost.IsRightDrawerOpen;
+            // Переключаем состояние видимости меню
+            DrawerHost.IsLeftDrawerOpen = !DrawerHost.IsLeftDrawerOpen;
+
+        }
+        private void Gallery_Click(object sender, RoutedEventArgs e)
+        {
+            SetButtonStyles(Gallery, Masters, QW, Record);
+            CoreNavigate.NavigatorCore.Navigate(new Gallery());
         }
 
-        //private void ToggleMenu(bool open)
-        //{
-        //    isMenuOpen = open;
+        private void Masters_Click(object sender, RoutedEventArgs e)
+        {
+            SetButtonStyles(Masters, Gallery, QW, Record);
+            CoreNavigate.NavigatorCore.Navigate(new MastersPage());
+        }
 
-        //    DoubleAnimation menuAnimation = new DoubleAnimation
-        //    {
-        //        To = open ? 0 : -250,
-        //        Duration = TimeSpan.FromMilliseconds(300)
-        //    };
-        //    MenuTransform.BeginAnimation(TranslateTransform.XProperty, menuAnimation);
+        private void QW_Click(object sender, RoutedEventArgs e)
+        {
+            SetButtonStyles(QW, Record, Masters, Gallery);
+            CoreNavigate.NavigatorCore.Navigate(new QwestionsPage());
+        }
 
-        //    DoubleAnimation overlayAnimation = new DoubleAnimation
-        //    {
-        //        To = open ? 0.5 : 0,
-        //        Duration = TimeSpan.FromMilliseconds(300)
-        //    };
-        //    overlayAnimation.Completed += (s, e) =>
-        //    {
-        //        Overlay.Visibility = open ? Visibility.Visible : Visibility.Collapsed;
-        //    };
+        private void Record_Click(object sender, RoutedEventArgs e)
+        {
+            SetButtonStyles(Record, QW, Masters, Gallery);
+            CoreNavigate.NavigatorCore.Navigate(new RecordPage());
+        }
 
-        //    Overlay.Visibility = Visibility.Visible;
-        //    Overlay.BeginAnimation(OpacityProperty, overlayAnimation);
-        //}
+        private void SetButtonStyles(Button activeButton, Button button2, Button button3, Button button4)
+        {
+            // Устанавливаем стиль для активной кнопки
+            activeButton.Style = (Style)FindResource("ButtonSt1");
+
+            // Устанавливаем стиль LightButton для неактивных кнопок
+            button2.Style = (Style)FindResource("LightButton");
+            button3.Style = (Style)FindResource("LightButton");
+            button4.Style = (Style)FindResource("LightButton");
+        }
+
     }
 }

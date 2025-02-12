@@ -46,40 +46,63 @@
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="25"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*" />
                     <RowDefinition Height="45"/>
                 </Grid.RowDefinitions>
-                <Grid Grid.Row="0">
-                    <Canvas>
-                        <!-- Кнопка открытия меню -->
-                        <materialDesign:DrawerHost x:Name="DrawerHost">
-                            <materialDesign:DrawerHost.RightDrawerContent>
-                                <StackPanel>
-                                    <Border Height="500"
-                                            Background="White"
-                                            Width="200">
-                                        <StackPanel>
-                                            <Button Content="Item 1" Margin="16" Style="{StaticResource LightButton}"/>
-                                            <Button Content="Item 2" Margin="16" Style="{StaticResource LightButton}"/>
-                                            <Button Content="Item 3" Margin="16" Style="{StaticResource LightButton}"/>
-                                        </StackPanel>
-                                    </Border>
+
+                <!-- ToggleButton сверху, не скрывается при открытии меню -->
+                <materialDesign:ColorZone Padding="16" Mode="Inverted" Grid.Row="1">
+                    <DockPanel>
+                        <ToggleButton x:Name="ToggleButton"
+                          Style="{DynamicResource MaterialDesignHamburgerToggleButton}"
+                          Click="ToggleButton_Click"
+                          HorizontalAlignment="Left"/>
+                    </DockPanel>
+                </materialDesign:ColorZone>
+                <Grid Grid.Row="1" Grid.RowSpan="3">
+                    <materialDesign:DrawerHost x:Name="DrawerHost">
+                        <materialDesign:DrawerHost.RightDrawerContent>
+                            <Grid Background="White" Width="450">
+                                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Vertical">
+                                    <Button Content="Галерея" 
+                                x:Name="Gallery" 
+                                Click="Gallery_Click" 
+                                Margin="16" 
+                                FontSize="25"
+                                Style="{StaticResource ButtonSt1}"
+                                Width="250"
+                                Height="50"/>
+                                    <Button Content="Мастера" 
+                                Margin="16" 
+                                x:Name="Masters" 
+                                FontSize="25"
+                                Click="Masters_Click" 
+                                Width="250"
+                                Height="50"
+                                Style="{StaticResource LightButton}"/>
+                                    <Button Content="Частые вопросы" 
+                                Margin="16" 
+                                x:Name="QW" 
+                                Width="250"
+                                Height="50"
+                                FontSize="25"
+                                Click="QW_Click" 
+                                Style="{StaticResource LightButton}"/>
+                                    <Button Content="Запись" 
+                                Margin="16" 
+                                x:Name="Record" 
+                                Width="250"
+                                Height="50"
+                                FontSize="25"
+                                Click="Record_Click" 
+                                Style="{StaticResource LightButton}"/>
                                 </StackPanel>
-                            </materialDesign:DrawerHost.RightDrawerContent>
-                            <Grid>
-                                <materialDesign:ColorZone Padding="16" Mode="Inverted">
-                                    <DockPanel>
-                                        <StackPanel Orientation="Horizontal">
-                                            <ToggleButton Style="{DynamicResource MaterialDesignHamburgerToggleButton}" 
-                                  Click="ToggleButton_Click"/>
-                                        </StackPanel>
-                                    </DockPanel>
-                                </materialDesign:ColorZone>
                             </Grid>
-                        </materialDesign:DrawerHost>
-                    </Canvas>
+                        </materialDesign:DrawerHost.RightDrawerContent>
+                    </materialDesign:DrawerHost>
                 </Grid>
-                <Grid Grid.Row="1">
+                <Grid Grid.Row="1"
+                      Panel.ZIndex="-1">
                     <StackPanel Orientation="Vertical"
                                VerticalAlignment="Bottom"
                                Height="550"
@@ -87,7 +110,8 @@
                                HorizontalAlignment="Center"
                                x:Name="AnimatedBlock"
                                Opacity="0"
-                               RenderTransformOrigin="0.5,0.5">
+                               RenderTransformOrigin="0.5,0.5"
+                                >
                         <StackPanel.RenderTransform>
                             <TranslateTransform x:Name="TextBlockTranslateTransform" X="-50" Y="0" />
                         </StackPanel.RenderTransform>
@@ -111,7 +135,8 @@
                                  HorizontalAlignment="Left"/>
                     </StackPanel>
                 </Grid>
-                <Grid Grid.Row="2">
+                <Grid Grid.Row="2"
+                      Panel.ZIndex="-2">
                     <StackPanel
                         Margin="25 0 0 0"
                         Orientation="Horizontal"
