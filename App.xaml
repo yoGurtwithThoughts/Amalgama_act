@@ -26,10 +26,9 @@
                 <ResourceDictionary Source="/Styles/Marker.xaml"/>
                 <ResourceDictionary Source="/Styles/DraverCustom.xaml"/>
                 <ResourceDictionary Source="/Styles/GalleryElementStyle.xaml"/>
-
-
+                <ResourceDictionary Source="/Styles/MatteGlassEffect.xaml"/>
+                <ResourceDictionary Source="/Styles/TextFieldStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-           
         </ResourceDictionary>
     </Application.Resources>
 </Application>

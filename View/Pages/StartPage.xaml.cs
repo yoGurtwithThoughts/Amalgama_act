@@ -1,4 +1,5 @@
 ﻿
+using Amalgama.View.AdminPages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -84,7 +85,7 @@ namespace Amalgama.View.Pages
                 }
                 else
                 {
-                    _dots[i].Fill = Brushes.Transparent; // Прозрачная заливка для неактивной точки
+                    _dots[i].Fill = Brushes.Transparent; 
                 }
             }
         }
@@ -420,8 +421,17 @@ namespace Amalgama.View.Pages
 
         private void ToggleButton_Click(object sender, RoutedEventArgs e)
         {
-            // Переключаем состояние видимости меню
-            DrawerHost.IsLeftDrawerOpen = !DrawerHost.IsLeftDrawerOpen;
+            DrawerHost.IsRightDrawerOpen = !DrawerHost.IsRightDrawerOpen;
+            if (DrawerHost.IsRightDrawerOpen)
+            {
+                BlurOverlay.Visibility = Visibility.Visible;
+                BackgroundBlur.Radius = 25; // Активируем размытие
+            }
+            else
+            {
+                BlurOverlay.Visibility = Visibility.Visible;
+                BackgroundBlur.Radius = 0; // Активируем размытие
+            }
 
         }
         private void Gallery_Click(object sender, RoutedEventArgs e)
@@ -459,5 +469,11 @@ namespace Amalgama.View.Pages
             button4.Style = (Style)FindResource("LightButton");
         }
 
+        private void SignAdmin_Click(object sender, RoutedEventArgs e)
+        {
+            AdminSigIn adminSignInWindow = new AdminSigIn();
+
+            adminSignInWindow.ShowDialog();
+        }
     }
 }

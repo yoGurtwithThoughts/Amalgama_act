@@ -20,6 +20,7 @@
     <None Remove="Images\black.png" />
     <None Remove="Images\black1.png" />
     <None Remove="Images\Closed.png" />
+    <None Remove="Images\dialogWin.png" />
     <None Remove="Images\dropMenuIcon.png" />
     <None Remove="Images\GalleryImagesPirsing\Bridge.jpg" />
     <None Remove="Images\GalleryImagesPirsing\Noostrill.jpg" />
@@ -45,6 +46,7 @@
     <None Remove="Images\TATOO.png" />
     <None Remove="Images\tattooremoval.png" />
     <None Remove="Images\TBold.png" />
+    <None Remove="Images\winAdmin.png" />
     <None Remove="Images\y.png" />
     <None Remove="Styles\TATOO REMOVAL.png" />
   </ItemGroup>
@@ -91,6 +93,9 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\Closed.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\dialogWin.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\dropMenuIcon.png">
@@ -168,16 +173,15 @@
     <Resource Include="Images\TBold.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Images\winAdmin.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\y.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\TATOO REMOVAL.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="View\AdminPages\" />
   </ItemGroup>
 
 </Project>

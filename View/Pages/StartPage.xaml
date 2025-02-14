@@ -43,122 +43,150 @@
                 <Frame x:Name="LeftFrame" NavigationUIVisibility="Hidden">
                 </Frame>
             </Grid>
+            <Grid x:Name="OverlayGrid"
+                 Background="#80000000"
+                 Visibility="Collapsed"
+                 Panel.ZIndex="-3" 
+                 Grid.ColumnSpan="4"
+                 Grid.RowSpan="3">
+                <Rectangle x:Name="MatteOverlay"
+                           Fill="#A0FFFFFF"
+                           Visibility="Collapsed"
+                           Panel.ZIndex="-2" />
+                <Rectangle x:Name="BlurOverlay"
+               Visibility="Collapsed" 
+                        Panel.ZIndex="-1">
+                    <Rectangle.Effect>
+                        <BlurEffect x:Name="BackgroundBlur" Radius="25" />
+                    </Rectangle.Effect>
+                    </Rectangle>
+            </Grid>
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="25"/>
                     <RowDefinition Height="*" />
                     <RowDefinition Height="45"/>
                 </Grid.RowDefinitions>
-
-                <!-- ToggleButton сверху, не скрывается при открытии меню -->
-                <materialDesign:ColorZone Padding="16" Mode="Inverted" Grid.Row="1">
+             
+                    <materialDesign:ColorZone Padding="16" 
+                                              Mode="Inverted" 
+                                              Grid.Row="1"
+                                               Panel.ZIndex="5">
                     <DockPanel>
                         <ToggleButton x:Name="ToggleButton"
-                          Style="{DynamicResource MaterialDesignHamburgerToggleButton}"
-                          Click="ToggleButton_Click"
-                          HorizontalAlignment="Left"/>
+                                      Style="{DynamicResource MaterialDesignHamburgerToggleButton}"
+                                      Click="ToggleButton_Click"
+                                      HorizontalAlignment="Left"
+                                      Grid.Row="0"
+                                     />
                     </DockPanel>
                 </materialDesign:ColorZone>
-                <Grid Grid.Row="1" Grid.RowSpan="3">
-                    <materialDesign:DrawerHost x:Name="DrawerHost">
-                        <materialDesign:DrawerHost.RightDrawerContent>
-                            <Grid Background="White" Width="450">
-                                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Vertical">
-                                    <Button Content="Галерея" 
-                                x:Name="Gallery" 
-                                Click="Gallery_Click" 
-                                Margin="16" 
-                                FontSize="25"
-                                Style="{StaticResource ButtonSt1}"
-                                Width="250"
-                                Height="50"/>
-                                    <Button Content="Мастера" 
-                                Margin="16" 
-                                x:Name="Masters" 
-                                FontSize="25"
-                                Click="Masters_Click" 
-                                Width="250"
-                                Height="50"
-                                Style="{StaticResource LightButton}"/>
-                                    <Button Content="Частые вопросы" 
-                                Margin="16" 
-                                x:Name="QW" 
-                                Width="250"
-                                Height="50"
-                                FontSize="25"
-                                Click="QW_Click" 
-                                Style="{StaticResource LightButton}"/>
-                                    <Button Content="Запись" 
-                                Margin="16" 
-                                x:Name="Record" 
-                                Width="250"
-                                Height="50"
-                                FontSize="25"
-                                Click="Record_Click" 
-                                Style="{StaticResource LightButton}"/>
-                                </StackPanel>
-                            </Grid>
-                        </materialDesign:DrawerHost.RightDrawerContent>
-                    </materialDesign:DrawerHost>
-                </Grid>
-                <Grid Grid.Row="1"
-                      Panel.ZIndex="-1">
+                <materialDesign:DrawerHost x:Name="DrawerHost" 
+                                           Grid.Row="1" 
+                                           Grid.RowSpan="4">
+                    <materialDesign:DrawerHost.RightDrawerContent>
+                        <Grid Background="White" Width="450"
+                                Panel.ZIndex="1">
+                            <StackPanel VerticalAlignment="Center" 
+                                        HorizontalAlignment="Center"
+                                        Orientation="Vertical">
+                                <Button Content="Галерея" 
+                                        x:Name="Gallery" 
+                                        Click="Gallery_Click" 
+                                        Margin="16" 
+                                        FontSize="25"
+                                        Style="{StaticResource ButtonSt1}"
+                                        Width="250"
+                                        Height="50"/>
+                                <Button Content="Мастера" 
+                                        Margin="16" 
+                                        x:Name="Masters" 
+                                        FontSize="25"
+                                        Click="Masters_Click" 
+                                        Width="250"
+                                        Height="50"
+                                           Style="{StaticResource LightButton}"/>
+                                <Button Content="Частые вопросы" 
+                                        Margin="16" 
+                                        x:Name="QW" 
+                                        Width="250"
+                                        Height="50"
+                                        FontSize="25"
+                                        Click="QW_Click" 
+                                        Style="{StaticResource LightButton}"/>
+                                <Button Content="Запись" 
+                                        Margin="16" 
+                                        x:Name="Record" 
+                                        Width="250"
+                                        Height="50"
+                                        FontSize="25"
+                                        Click="Record_Click" 
+                                        Style="{StaticResource LightButton}"/>
+                              
+                            </StackPanel>
+                            <Button x:Name="SignAdmin"
+                                  VerticalAlignment="Bottom"
+                                  Style="{StaticResource LightButton}"
+                                  HorizontalAlignment="Center"
+                                  Click="SignAdmin_Click"
+                                  Content="Войти"/>
+                        </Grid>
+                    </materialDesign:DrawerHost.RightDrawerContent>
+                </materialDesign:DrawerHost>
+
+                <Grid Grid.Row="1" Grid.Column="1" Panel.ZIndex="-1">
+                    <!-- Указан столбец 1 -->
                     <StackPanel Orientation="Vertical"
-                               VerticalAlignment="Bottom"
-                               Height="550"
-                               Width="200"
-                               HorizontalAlignment="Center"
-                               x:Name="AnimatedBlock"
-                               Opacity="0"
-                               RenderTransformOrigin="0.5,0.5"
-                                >
+                            VerticalAlignment="Bottom"
+                            Height="550"
+                            Width="200"
+                            HorizontalAlignment="Center"
+                            x:Name="AnimatedBlock"
+                            Opacity="1"
+                            RenderTransformOrigin="0.5,0.5">
                         <StackPanel.RenderTransform>
-                            <TranslateTransform x:Name="TextBlockTranslateTransform" X="-50" Y="0" />
+                            <TranslateTransform X="0" Y="0" />
                         </StackPanel.RenderTransform>
                         <TextBlock Text="Тату салон"
-                                   Style="{StaticResource TitleMain}"></TextBlock>
+                       Style="{StaticResource TitleMain}" />
                         <Image Source="/Images/AMALGAMA.png" 
-                               Margin="0 7.5 0 0"/>
+                   Margin="0 7.5 0 0" />
                         <TextBlock Text="Профессиональные услуги
-                                         Студии 
-                                         татуировки 
-                                         в Туле"
-                                   Margin="17 5"
-                                   TextWrapping="Wrap"
-                                   Foreground="Black"
-                        Style="{StaticResource TitleMain}"/>
+                                     Студии татуировки в Туле"
+                               Margin="17 5"
+                               TextWrapping="Wrap"
+                               Foreground="Black"
+                               Style="{StaticResource TitleMain}" />
                         <Button x:Name="SignButton"
-                                 Style="{StaticResource ButtonSt1}"
-                                 Content="ЗАПИСАТЬСЯ"
-                                 Click="SignButton_Click"
-                                 Margin="0 45 "
-                                 HorizontalAlignment="Left"/>
+                            Style="{StaticResource ButtonSt1}"
+                            Content="ЗАПИСАТЬСЯ"
+                            Click="SignButton_Click"
+                            Margin="0 45"
+                            HorizontalAlignment="Left" />
                     </StackPanel>
+
                 </Grid>
-                <Grid Grid.Row="2"
-                      Panel.ZIndex="-2">
-                    <StackPanel
-                        Margin="25 0 0 0"
-                        Orientation="Horizontal"
-                        Height="230"
-                        x:Name="moreButton"
-                        Opacity="0"
-                        RenderTransformOrigin="0.5,0.5">
+                <Grid Grid.Row="2" Grid.Column="1" Panel.ZIndex="-2">
+                    <StackPanel Margin="25 0 0 0"
+                                 Orientation="Horizontal"
+                                 Height="230"
+                                 x:Name="moreButton"
+                                 Opacity="1"
+                                 RenderTransformOrigin="0.5,0.5">   
                         <StackPanel.RenderTransform>
-                            <TranslateTransform x:Name="MoreButtonTranslateTransform" X="-50" Y="0" />
+                            <TranslateTransform X="-50" Y="0" />
                         </StackPanel.RenderTransform>
                         <Border x:Name="VK"
-                                MouseDown="VK_MouseDown"
-                                VerticalAlignment="Top" Height="41">
-                            <Image Source="/Images/black.png" 
-                               />
+                                 MouseDown="VK_MouseDown"
+                                 VerticalAlignment="Top" Height="41">
+                            <Image Source="/Images/black.png" />
                         </Border>
-                        <Border Width="7.8"></Border>
-                        <Border x:Name="TG"
-                           MouseDown="TG_MouseDown">
+                                <Border Width="7.8" />
+                                <Border x:Name="TG"
+                                       MouseDown="TG_MouseDown">
                             <Image Source="/Images/black1.png" 
                                    Height="41"
-                                   VerticalAlignment="Top"/>
+                                   VerticalAlignment="Top" />  
                         </Border>
                     </StackPanel>
                 </Grid>
