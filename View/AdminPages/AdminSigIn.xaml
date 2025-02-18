@@ -8,35 +8,53 @@
         mc:Ignorable="d"
         WindowStyle="None"
         ResizeMode="NoResize"
-        Background="Transparent"
-        Height="550" Width="650"
+        WindowStartupLocation="CenterScreen"
+        Height="650" Width="550"
+         AllowsTransparency="True"
+         Background="#30FFFFFF"
         Style="{StaticResource MaterialDesignWindow}">
     <Grid>
-        <Image Source="/Images/winAdmin.png" 
-               Stretch="UniformToFill" 
-               HorizontalAlignment="Stretch" 
-               VerticalAlignment="Stretch"/>
-        <Border>
+        <Border Style="{StaticResource MatteGlassBorder}"
+                Panel.ZIndex="-5"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="15"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Button x:Name="CloseDialog"
-                        Grid.Row="0"
-                        HorizontalAlignment="Right"
-                        VerticalAlignment="Center"
-                        Background="Transparent"
-                        Click="CloseDialog_Click">
-                    <materialDesign:PackIcon Kind="Close" 
-                                     Foreground="White" 
-                                     VerticalAlignment="Center" 
-                                     HorizontalAlignment="Center"
-                                     Margin="0 5 0 0"/>
+            <Button x:Name="CloseDialog"
+                     HorizontalAlignment="Right"
+                     VerticalAlignment="Center"
+                     Background="Transparent"
+                     Click="CloseDialog_Click">
+                <Button.Content>
+                     <materialDesign:PackIcon Kind="Close" 
+                                              Foreground="White" 
+                                              VerticalAlignment="Center" 
+                                              HorizontalAlignment="Center"
+                                              Margin="0 5 0 0"/>
+                </Button.Content>
                 </Button>
+                <Canvas>
+                    <Grid Grid.Row="1"
+                          Canvas.Top="105"
+                          Canvas.Left="95">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Image Source="/Images/AMALGAMA.png"
+                               Height="50"
+                               VerticalAlignment="Center"
+                               Grid.Row="0"
+                               HorizontalAlignment="Center"/>
+                    </Grid>
+                </Canvas>
                 <StackPanel Orientation="Vertical" 
                             VerticalAlignment="Center" 
                             HorizontalAlignment="Center"
+                            
                             Grid.Row="1">
                     <TextBlock Text="Имя" 
                                Style="{StaticResource TextLogin}"/>
@@ -56,28 +74,37 @@
                                      Style="{StaticResource CustomTextField}"
                                      HorizontalContentAlignment="Center"
                                      VerticalContentAlignment="Center"
-                                     TextChanged="Password_TextChanged"
-                                      />
+                                     TextChanged="Password_TextChanged"/>
                             <Button x:Name="TogglePasswordButton"
-                                    Width="30"
-                                    Height="30"
-                                    HorizontalAlignment="Right"
-                                    VerticalAlignment="Center"
-                                    Margin="0,0,15,0"
-                                    Background="Transparent"
-                                    BorderThickness="0"
-                                    Focusable="False" 
-                                    Visibility="Collapsed"
-                                    >
+                                        Width="30"
+                                        Height="30"
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Center"
+                                        Margin="0,0,15,0"
+                                        Background="Transparent"
+                                        BorderThickness="0"
+                                        Focusable="False" 
+                                        Visibility="Collapsed">
                                 <Button.Content>
-                                    <materialDesign:PackIcon 
+                                        <materialDesign:PackIcon 
                                             Kind="Eye" 
                                             Foreground="White" />
-                                </Button.Content>
+                                    </Button.Content>
                                 </Button>
-                        </StackPanel>
+                            </StackPanel>
                     </Border>
+                    <Canvas>
+
+                        <Border Style="{StaticResource SignBorder}"
+                                    HorizontalAlignment="Center"
+                                    Canvas.Top="35">
+                            <TextBlock Text="Войти"
+                                       Style="{StaticResource SignButtonStyle}"/>
+
+                        </Border>
+                    </Canvas>
                 </StackPanel>
+               
             </Grid>
         </Border>
     </Grid>
