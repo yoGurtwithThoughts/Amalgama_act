@@ -33,6 +33,8 @@
     <None Remove="Images\laura.png" />
     <None Remove="Images\LeftImage.jpg" />
     <None Remove="Images\mainBanner.png" />
+    <None Remove="Images\mastersBackground.jpg" />
+    <None Remove="Images\MastersPersonalDate\MasterMaria.jpg" />
     <None Remove="Images\mBanner.png" />
     <None Remove="Images\Nikita.jpg" />
     <None Remove="Images\NIKITA.png" />
@@ -132,6 +134,12 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\mainBanner.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\mastersBackground.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\MastersPersonalDate\MasterMaria.jpg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\mBanner.png">

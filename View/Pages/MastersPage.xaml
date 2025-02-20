@@ -5,10 +5,179 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Amalgama.View.Pages"
       mc:Ignorable="d" 
+      Loaded="Page_Loaded"
+      Background="Transparent"
       d:DesignHeight="450" d:DesignWidth="800"
       Title="MastersPage">
+    <Border>
+        <Grid>
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <LinearGradientBrush.GradientStops>
+                        <GradientStop Color="#AFAEAE" Offset="0.0"/>
+                        <GradientStop Color="#DCDCDC" Offset="0.25"/>
+                        <GradientStop Color="#DCDCDC" Offset="0.5"/>
+                        <GradientStop Color="#DCDCDC" Offset="0.75"/>
+                        <GradientStop Color="#F2F2F2" Offset="1.0"/>
+                    </LinearGradientBrush.GradientStops>
+                </LinearGradientBrush>
+            </Grid.Background>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="35"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="35"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Grid.Background>
+                    <LinearGradientBrush StartPoint="0.5,0.5" EndPoint="0.5,0.5">
+                        <LinearGradientBrush.GradientStops>
+                            <GradientStop Color="#B8B8B8" Offset="0.15"/>
+                            <GradientStop Color="#DCDCDC" Offset="1.95"/>
+                        </LinearGradientBrush.GradientStops>
+                    </LinearGradientBrush>
+                </Grid.Background>
+            </Grid>
+            <Grid Grid.Column="4">
+                <Grid.Background>
+                    <LinearGradientBrush StartPoint="0.5,0.5" EndPoint="0.5,0.5">
+                        <LinearGradientBrush.GradientStops>
+                            <GradientStop Color="#B8B8B8" Offset="0.15"/>
+                            <GradientStop Color="#DCDCDC" Offset="1.95"/>
+                        </LinearGradientBrush.GradientStops>
+                    </LinearGradientBrush>
+                </Grid.Background>
+                <Image x:Name="Close"
+                       MouseDown="Close_MouseDown"
+                       Source="/Images/Closed.png"
+                       Height="15"
+                       Width="15"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Top"/>
+            </Grid>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="450"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid x:Name="ContentGrid" 
+                      HorizontalAlignment="Center" 
+                      VerticalAlignment="Top"
+                      Grid.Row="0">
+                    <Image x:Name="BackgroundImage" 
+                           Source="/Images/mastersBackground.jpg" 
+                           Height="375" 
+                           HorizontalAlignment="Center" 
+                           VerticalAlignment="Top" 
+                           Opacity="0">
+                        <Image.RenderTransform>
+                            <TranslateTransform Y="-350" />
+                        </Image.RenderTransform>
+                    </Image>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock x:Name="HeaderText" 
+                                   Text="Наши мастера" 
+                                   HorizontalAlignment="Center" 
+                                   VerticalAlignment="Top" 
+                                   Margin="0 25 0 0"
+                                   Style="{StaticResource TextLogin}" 
+                                   Opacity="0">
+                            <TextBlock.RenderTransform>
+                                <TranslateTransform Y="-75" />
+                            </TextBlock.RenderTransform>
+                        </TextBlock>
+                        <StackPanel HorizontalAlignment="Center" 
+                                    VerticalAlignment="Center" 
+                                    Margin="20 15 0 0" 
+                                    Width="285">
+                            <TextBlock x:Name="Txt1_Line1" 
+                                       Text="Команда профессионалов" 
+                                       Style="{StaticResource TextLogin}" 
+                                       Opacity="0" 
+                                       TextAlignment="Left" 
+                                       Margin="0 0 0 5">
+                                <TextBlock.RenderTransform>
+                                    <TranslateTransform Y="-75" />
+                                </TextBlock.RenderTransform>
+                            </TextBlock>
+                            <TextBlock x:Name="Txt1_Line2" 
+                                       Text="принимается за дело" 
+                                       Style="{StaticResource TextLogin}" 
+                                       Opacity="0" 
+                                       TextAlignment="Center"
+                                       Margin="20 0 0 0">   
+                                <TextBlock.RenderTransform>
+                                    <TranslateTransform Y="-75" />
+                                </TextBlock.RenderTransform>
+                            </TextBlock>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Row="1"
+                      Panel.ZIndex="1"
+                      Margin="0 -350 0 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1.2*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Source="/Images/MastersPersonalDate/MasterMaria.jpg"
+                           Grid.Column="0"
+                           Height="360"
+                           Width="300"
+                           Stretch="Uniform"
+                           HorizontalAlignment="Right" 
+                           VerticalAlignment="Bottom"
+                           Margin="0 0 20 0"
+                           MouseEnter="Image_MouseEnter"
+                           MouseLeave="Image_MouseLeave"
+                           x:Name="MasterTatoo">
+                        <Image.RenderTransform>
+                            <TransformGroup>
+                                <TranslateTransform Y="-750" />
+                                <ScaleTransform ScaleX="1" ScaleY="1" />
+                            </TransformGroup>
+                        </Image.RenderTransform>
+                    </Image>
+                    <Image Source="/Images/MastersPersonalDate/MasterMaria.jpg"
+                           Grid.Column="1"
+                           Height="390"
+                           Width="300"
+                           Stretch="Uniform"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Top"
+                           Margin="0 50 0 0"
+                           MouseEnter="Image_MouseEnter"
+                           MouseLeave="Image_MouseLeave"
+                           x:Name="MasterDeleteTatoo">
+                        <Image.RenderTransform>
+                            <TransformGroup>
+                                <TranslateTransform Y="-600" />
+                                <ScaleTransform ScaleX="1" ScaleY="1" />
+                            </TransformGroup>
+                        </Image.RenderTransform>
+                    </Image>
 
-    <Grid>
-        
-    </Grid>
+                    <Image Source="/Images/MastersPersonalDate/MasterMaria.jpg"
+                           Grid.Column="2"
+                           Height="360"
+                           Width="300"
+                           Stretch="Uniform"
+                           HorizontalAlignment="Left" 
+                           VerticalAlignment="Bottom"
+                           Margin="20 0 0 0"
+                           MouseEnter="Image_MouseEnter"
+                           MouseLeave="Image_MouseLeave"
+                           x:Name="MasterPirc">
+                        <Image.RenderTransform>
+                            <TransformGroup>
+                                <TranslateTransform Y="-750" />
+                                <ScaleTransform ScaleX="1" ScaleY="1" />
+                            </TransformGroup>
+                        </Image.RenderTransform>
+                    </Image>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Border>
 </Page>
+
