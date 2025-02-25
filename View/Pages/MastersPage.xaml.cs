@@ -25,6 +25,19 @@ namespace Amalgama.View.Pages
         {
             InitializeComponent();
             Loaded += Page_Loaded;
+            MyGrid.Loaded += (sender, args) =>
+            {
+                DoubleAnimation fadeInAnimation = new DoubleAnimation
+                {
+                    From = 0, // Начальная прозрачность
+                    To = 1,   // Конечная прозрачность
+                    Duration = TimeSpan.FromSeconds(1) // Длительность анимации (1 секунда)
+                };
+
+                // Запуск анимации
+                MyGrid.BeginAnimation(UIElement.OpacityProperty, fadeInAnimation);
+            };
+        
         }
 
         private void Close_MouseDown(object sender, MouseButtonEventArgs e)
@@ -34,7 +47,6 @@ namespace Amalgama.View.Pages
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            // Анимация перемещения изображения
             DoubleAnimation imageSlideIn = new DoubleAnimation
             {
                 From = -350,
