@@ -13,6 +13,8 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
+using static Amalgama.Core.Navigation;
 
 namespace Amalgama.View.Pages
 {
@@ -47,14 +49,38 @@ namespace Amalgama.View.Pages
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            DoubleAnimation imageSlideIn = new DoubleAnimation
+            var timer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromMilliseconds(100) // Задержка 100 миллисекунд
+            };
+
+            timer.Tick += (s, args) =>
+            {
+                timer.Stop(); // Останавливаем таймер после первого срабатывания
+
+                // Показываем и анимируем первое изображение
+                MasterTatoo.Visibility = Visibility.Visible;
+                AnimateImage(MasterTatoo, -750, 0);
+
+                // Показываем и анимируем второе изображение
+                MasterDeleteTatoo.Visibility = Visibility.Visible;
+                AnimateImage(MasterDeleteTatoo, -750, 0);
+
+                // Показываем и анимируем третье изображение
+                MasterPirc.Visibility = Visibility.Visible;
+                AnimateImage(MasterPirc, -750, 0);
+            };
+
+            timer.Start(); // Запускаем таймер
+        
+        DoubleAnimation imageSlideIn = new DoubleAnimation
             {
                 From = -350,
                 To = 0,
                 Duration = TimeSpan.FromSeconds(1.5),
                 BeginTime = TimeSpan.FromSeconds(0.5),
-                EasingFunction = new CircleEase { EasingMode = EasingMode.EaseInOut }
-            };
+                EasingFunction = new ElasticEase { Oscillations = 1, Springiness = 3 }
+        };
             BackgroundImage.RenderTransform.BeginAnimation(TranslateTransform.YProperty, imageSlideIn);
 
             // Анимация прозрачности изображения
@@ -74,7 +100,7 @@ namespace Amalgama.View.Pages
                 To = 0,
                 Duration = TimeSpan.FromSeconds(1.5),
                 BeginTime = TimeSpan.FromSeconds(1.0),
-                EasingFunction = new ElasticEase { EasingMode = EasingMode.EaseOut, Oscillations = 2, Springiness = 5 }
+                EasingFunction = new ElasticEase { EasingMode = EasingMode.EaseOut, Oscillations = 2, Springiness = 3 }
             };
             HeaderText.RenderTransform.BeginAnimation(TranslateTransform.YProperty, textSlideIn);
 
@@ -93,7 +119,7 @@ namespace Amalgama.View.Pages
                 To = 0,
                 Duration = TimeSpan.FromSeconds(1.5),
                 BeginTime = TimeSpan.FromSeconds(1.0),
-                EasingFunction = new ElasticEase { EasingMode = EasingMode.EaseOut, Oscillations = 2, Springiness = 5 }
+                EasingFunction = new ElasticEase { EasingMode = EasingMode.EaseOut, Oscillations = 2, Springiness = 3 }
             };
             Txt1_Line1.RenderTransform.BeginAnimation(TranslateTransform.YProperty, textSlideIn1);
 
@@ -112,7 +138,7 @@ namespace Amalgama.View.Pages
                 To = 0,
                 Duration = TimeSpan.FromSeconds(1.5),
                 BeginTime = TimeSpan.FromSeconds(1.0),
-                EasingFunction = new ElasticEase { EasingMode = EasingMode.EaseOut, Oscillations = 2, Springiness = 5 }
+                EasingFunction = new ElasticEase { EasingMode = EasingMode.EaseOut, Oscillations = 2, Springiness = 3 }
             };
             Txt1_Line2.RenderTransform.BeginAnimation(TranslateTransform.YProperty, textSlideIn1);
 
@@ -126,41 +152,56 @@ namespace Amalgama.View.Pages
             };
             Txt1_Line2.BeginAnimation(UIElement.OpacityProperty, textFadeIn1);
 
-            AnimateImage(MasterTatoo, -350, 0);
-            // Анимация для второго изображения
-            AnimateImage(MasterDeleteTatoo, -350, 0);
-            // Анимация для третьего изображения
-            AnimateImage(MasterPirc, -350, 0);
+            //MasterTatoo.Visibility = Visibility.Visible;
+            //AnimateImage(MasterTatoo, -750, 0);
+
+            //MasterDeleteTatoo.Visibility = Visibility.Visible;
+            //AnimateImage(MasterDeleteTatoo, -750, 0);
+
+            //MasterPirc.Visibility = Visibility.Visible;
+            //AnimateImage(MasterPirc, -750, 0);
         }
 
         private void AnimateImage(Image image, double fromY, double toY)
         {
-            // Проверяем, является ли RenderTransform TransformGroup
             if (image.RenderTransform is TransformGroup transformGroup)
             {
-                // Находим TranslateTransform в TransformGroup
                 var translateTransform = transformGroup.Children.OfType<TranslateTransform>().FirstOrDefault();
                 if (translateTransform != null)
                 {
+                    // Анимация перемещения
                     DoubleAnimation slideIn = new DoubleAnimation
                     {
                         From = fromY,
                         To = toY,
                         Duration = TimeSpan.FromSeconds(1.5),
                         BeginTime = TimeSpan.FromSeconds(0.5),
-                        EasingFunction = new CircleEase { EasingMode = EasingMode.EaseInOut }
+                        EasingFunction = new ElasticEase { Oscillations = 1, Springiness = 3 }
                     };
-
-                    // Применяем анимацию к TranslateTransform
                     translateTransform.BeginAnimation(TranslateTransform.YProperty, slideIn);
+
+                    // Анимация обрезки (clip)
+                    var clipGeometry = new RectangleGeometry { Rect = new Rect(0, 0, image.ActualWidth, 0) };
+                    image.Clip = clipGeometry;
+
+                    // Создаем RectAnimation для анимации Rect
+                    RectAnimation clipAnimation = new RectAnimation
+                    {
+                        From = new Rect(0, 0, image.ActualWidth, 0), // Начальная высота равна 0
+                        To = new Rect(0, 0, image.ActualWidth, image.ActualHeight), // Конечная высота равна высоте изображения
+                        Duration = TimeSpan.FromSeconds(1.5),
+                        BeginTime = TimeSpan.FromSeconds(0.5),
+                         EasingFunction = new ElasticEase { Oscillations = 1, Springiness = 3 }
+                    };
+                    clipGeometry.BeginAnimation(RectangleGeometry.RectProperty, clipAnimation);
                 }
             }
             else
             {
-                // Если RenderTransform не является TransformGroup, создаем новый TranslateTransform
                 var translateTransform = new TranslateTransform { Y = fromY };
                 image.RenderTransform = translateTransform;
 
+                // Анимация перемещения
                 DoubleAnimation slideIn = new DoubleAnimation
                 {
                     From = fromY,
@@ -169,20 +210,31 @@ namespace Amalgama.View.Pages
                     BeginTime = TimeSpan.FromSeconds(0.5),
                     EasingFunction = new CircleEase { EasingMode = EasingMode.EaseInOut }
                 };
-
-                // Применяем анимацию к новому TranslateTransform
                 translateTransform.BeginAnimation(TranslateTransform.YProperty, slideIn);
+
+                // Анимация обрезки (clip)
+                var clipGeometry = new RectangleGeometry { Rect = new Rect(0, 0, image.ActualWidth, 0) };
+                image.Clip = clipGeometry;
+
+                // Создаем RectAnimation для анимации Rect
+                RectAnimation clipAnimation = new RectAnimation
+                {
+                    From = new Rect(0, 0, image.ActualWidth, 0), // Начальная высота равна 0
+                    To = new Rect(0, 0, image.ActualWidth, image.ActualHeight), // Конечная высота равна высоте изображения
+                    Duration = TimeSpan.FromSeconds(1.5),
+                    BeginTime = TimeSpan.FromSeconds(0.5)
+                };
+                clipGeometry.BeginAnimation(RectangleGeometry.RectProperty, clipAnimation);
             }
         }
         private void Image_MouseEnter(object sender, MouseEventArgs e)
         {
             if (sender is Image image && image.RenderTransform is TransformGroup transformGroup)
             {
-                // Находим ScaleTransform в TransformGroup
+                
                 var scaleTransform = transformGroup.Children.OfType<ScaleTransform>().FirstOrDefault();
                 if (scaleTransform != null)
                 {
-                    // Анимация увеличения
                     DoubleAnimation scaleUp = new DoubleAnimation
                     {
                         From = 1.0,
@@ -200,11 +252,9 @@ namespace Amalgama.View.Pages
         {
             if (sender is Image image && image.RenderTransform is TransformGroup transformGroup)
             {
-                // Находим ScaleTransform в TransformGroup
                 var scaleTransform = transformGroup.Children.OfType<ScaleTransform>().FirstOrDefault();
                 if (scaleTransform != null)
                 {
-                    // Анимация уменьшения
                     DoubleAnimation scaleDown = new DoubleAnimation
                     {
                         From = 1.2,
@@ -236,6 +286,11 @@ namespace Amalgama.View.Pages
         private void MasterPirc_MouseDown(object sender, MouseButtonEventArgs e)
         {
 
+        }
+
+        private void ArrowButton_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            CoreNavigate.NavigatorCore.Navigate(new StartPage());
         }
     }
 }
