@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Amalgama.View;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -275,17 +276,17 @@ namespace Amalgama.View.Pages
 
         private void MasterDeleteTatoo_MouseDown(object sender, MouseButtonEventArgs e)
         {
-
+            CoreNavigate.NavigatorCore.Navigate(new MasterRemoveTatoo());
         }
 
         private void MasterTatoo_MouseDown(object sender, MouseButtonEventArgs e)
         {
-
+            CoreNavigate.NavigatorCore.Navigate(new MasterTatoo());
         }
 
         private void MasterPirc_MouseDown(object sender, MouseButtonEventArgs e)
         {
-
+            CoreNavigate.NavigatorCore.Navigate(new MasterPirs());
         }
 
         private void ArrowButton_MouseDown(object sender, MouseButtonEventArgs e)
