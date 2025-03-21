@@ -36,6 +36,7 @@
     <None Remove="Images\mastersBackground.jpg" />
     <None Remove="Images\MastersPersonalDate\MasterAngelina.png" />
     <None Remove="Images\MastersPersonalDate\MasterArisha.png" />
+    <None Remove="Images\MastersPersonalDate\MasterBackground.png" />
     <None Remove="Images\MastersPersonalDate\MasterMaria.jpg" />
     <None Remove="Images\mBanner.png" />
     <None Remove="Images\Nikita.jpg" />
@@ -145,6 +146,9 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\MastersPersonalDate\MasterArisha.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\MastersPersonalDate\MasterBackground.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\MastersPersonalDate\MasterMaria.jpg">

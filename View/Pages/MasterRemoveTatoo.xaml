@@ -26,16 +26,15 @@
         <Grid Grid.Row="0" Grid.Column="1">
             <StackPanel Orientation="Horizontal">
                 <Border x:Name="ArrowButton"
-             MouseDown="ArrowBut_MouseDown"
-             Style="{StaticResource ArrowBackbutton}"
-             HorizontalAlignment="Left"
-             Margin="15,15,0,0">
+                         MouseDown="ArrowBut_MouseDown"
+                         Style="{StaticResource ArrowBackbutton}"
+                         HorizontalAlignment="Left"
+                         Margin="15,15,0,0">
                     <Image Source="/Images/ArrowBackButton.png" 
                 Stretch="Uniform"/>
                 </Border>
             </StackPanel>
         </Grid>
-
         <!-- Левая боковая панель -->
         <Grid Grid.Column="0" Grid.RowSpan="3">
             <Grid.Background>
@@ -64,7 +63,20 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Top"/>
         </Grid>
-
+        <Image Source="/Images/MastersPersonalDate/MasterBackground.png" 
+               Panel.ZIndex="-1"
+               Height="450"
+               Width="400"
+               VerticalAlignment="Top"
+               HorizontalAlignment="Left"
+               Grid.RowSpan="2"
+               x:Name="AnimatedBack"
+               Grid.Column="1"
+               Grid.Row="0">
+            <Image.RenderTransform>
+                <TranslateTransform Y="0" X="0"/>
+            </Image.RenderTransform>
+        </Image>
         <!-- Изображение слева -->
         <Grid Grid.Column="1" Grid.Row="1">
             <Image Source="/Images/MastersPersonalDate/MasterArisha.png" 
@@ -72,9 +84,10 @@
                     Width="350"
                     Stretch="Fill"
                     HorizontalAlignment="Left"
-                    VerticalAlignment="Center"
+                    VerticalAlignment="Top"
                     Margin="25,10,0,0"
-                    x:Name="ImgAnimated">
+                    x:Name="ImgAnimated"
+                    Panel.ZIndex="1">
                 <Image.RenderTransform>
                     <TranslateTransform Y="0" X="0"/>
                 </Image.RenderTransform>
@@ -114,15 +127,33 @@
                     <TranslateTransform Y="50"/>
                 </Border.RenderTransform>
                 <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
+                    <TextBlock x:Name="TxtWriteTitle2"
+                               Grid.Row="0"
+                               Style="{StaticResource OtherTxt}"
+                               TextWrapping="Wrap"
+                               FontSize="25"
+                               VerticalAlignment="Center"
+                               MaxHeight="75" 
+                               TextAlignment="Center"
+                               Margin="0 -105 150 0"
+                               HorizontalAlignment="Center"
+                               Grid.ColumnSpan="3"
+                               />
                     <!-- Первый Border -->
                     <Border Grid.Column="0"
                             Height="55"
-                            Width="210">
+                            Width="210"
+                            Grid.Row="1">
                         <Border.Effect>
                             <DropShadowEffect Color="#000000" 
                                               Direction="-90" 
@@ -145,7 +176,8 @@
                     <!-- Второй Border -->
                     <Border Grid.Column="1"
                             Height="55"
-                            Width="210">
+                            Width="210"
+                            Grid.Row="1">
                         <Border.Effect>
                             <DropShadowEffect Color="#000000" 
                                               Direction="-90" 
@@ -168,7 +200,8 @@
                     <!-- Третий Border -->
                     <Border Grid.Column="2"
                             Height="55"
-                            Width="210">
+                            Width="210"
+                            Grid.Row="1">
                         <Border.Effect>
                             <DropShadowEffect Color="#000000" 
                                               Direction="-90" 
@@ -188,6 +221,15 @@
                                        VerticalAlignment="Center"/>
                         </Border>
                     </Border>
+                    <Button Style="{StaticResource ButtonSt1}"
+                            Grid.Row="2"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Grid.ColumnSpan="3"
+                            Content="Записаться"
+                            x:Name="RecButtom"
+                            Click="RecButtom_Click"
+                            Margin="0 25 0 0"/>
                 </Grid>
             </Border>
         </Grid>

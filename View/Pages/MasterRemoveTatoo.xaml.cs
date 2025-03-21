@@ -27,9 +27,11 @@ namespace Amalgama.View.Pages
         private int _currentIndex;
         private int _currentParagraphIndex;
         private TextBlock[] _textBlocksTitle;
+        private TextBlock[] _textBlocksTitle2;
         private TextBlock[] _textBlocks; // Массив для хранения всех TextBlock
         private (string Text, bool IsBold)[][] _paragraphs;
         private (string Text, bool IsBold)[][] _paragraphstitle;
+        private (string Text, bool IsBold)[][] _paragraphstitle2;
 
         public MasterRemoveTatoo()
         {
@@ -55,6 +57,15 @@ namespace Amalgama.View.Pages
         }
             };
 
+            // Инициализируем заголовок "Плюсы"
+            _paragraphstitle2 = new (string Text, bool IsBold)[][]
+            {
+        new (string, bool)[]
+        {
+            ("\n\t\tПлюсы", false)
+        }
+            };
+
             // Инициализируем основной текст
             _paragraphs = new (string Text, bool IsBold)[][]
             {
@@ -69,8 +80,8 @@ namespace Amalgama.View.Pages
 
             // Применяем текст к элементам интерфейса
             ApplyTextToTextBlocks();
-        
         }
+
         private void ApplyTextToTextBlocks()
         {
             // Применяем заголовок
@@ -79,6 +90,18 @@ namespace Amalgama.View.Pages
                 foreach (var (text, isBold) in paragraph)
                 {
                     TxtWriteTitle.Inlines.Add(new Run(text)
+                    {
+                        FontWeight = isBold ? FontWeights.Bold : FontWeights.Normal
+                    });
+                }
+            }
+
+            // Применяем заголовок "Плюсы" в TxtPluses
+            foreach (var paragraph in _paragraphstitle2)
+            {
+                foreach (var (text, isBold) in paragraph)
+                {
+                    TxtWriteTitle2.Inlines.Add(new Run(text)
                     {
                         FontWeight = isBold ? FontWeights.Bold : FontWeights.Normal
                     });
@@ -99,6 +122,7 @@ namespace Amalgama.View.Pages
         }
         private void AnimateImage()
         {
+            // Создаем анимацию для изменения прозрачности (Opacity)
             var fadeAnimation = new DoubleAnimation
             {
                 From = 0,
@@ -107,6 +131,7 @@ namespace Amalgama.View.Pages
                 EasingFunction = new PowerEase { Power = 3 }
             };
 
+            // Создаем анимацию для смещения по оси X
             var translateAnimation = new DoubleAnimation
             {
                 From = -150,
@@ -115,16 +140,66 @@ namespace Amalgama.View.Pages
                 EasingFunction = new CubicEase { EasingMode = EasingMode.EaseInOut }
             };
 
-            Storyboard.SetTarget(fadeAnimation, ImgAnimated);
+            // Убеждаемся, что RenderTransform является TranslateTransform
+            if (!(AnimatedBack.RenderTransform is TranslateTransform))
+            {
+                AnimatedBack.RenderTransform = new TranslateTransform();
+            }
+
+            // Применяем анимации к элементу AnimatedBack
+            Storyboard.SetTarget(fadeAnimation, AnimatedBack);
             Storyboard.SetTargetProperty(fadeAnimation, new PropertyPath(UIElement.OpacityProperty));
 
-            Storyboard.SetTarget(translateAnimation, ImgAnimated);
+            Storyboard.SetTarget(translateAnimation, AnimatedBack);
             Storyboard.SetTargetProperty(translateAnimation, new PropertyPath("(UIElement.RenderTransform).(TranslateTransform.X)"));
 
-            var storyboard = new Storyboard();
-            storyboard.Children.Add(fadeAnimation);
-            storyboard.Children.Add(translateAnimation);
-            storyboard.Begin();
+            // Если нужно также анимировать ImgAnimated, создаем отдельные анимации
+            if (ImgAnimated != null)
+            {
+                if (!(ImgAnimated.RenderTransform is TranslateTransform))
+                {
+                    ImgAnimated.RenderTransform = new TranslateTransform();
+                }
+
+                var fadeAnimationForImg = new DoubleAnimation
+                {
+                    From = 0,
+                    To = 1,
+                    Duration = TimeSpan.FromSeconds(1),
+                    EasingFunction = new PowerEase { Power = 3 }
+                };
+
+                var translateAnimationForImg = new DoubleAnimation
+                {
+                    From = -150,
+                    To = 0,
+                    Duration = TimeSpan.FromSeconds(1),
+                    EasingFunction = new CubicEase { EasingMode = EasingMode.EaseInOut }
+                };
+
+                Storyboard.SetTarget(fadeAnimationForImg, ImgAnimated);
+                Storyboard.SetTargetProperty(fadeAnimationForImg, new PropertyPath(UIElement.OpacityProperty));
+
+                Storyboard.SetTarget(translateAnimationForImg, ImgAnimated);
+                Storyboard.SetTargetProperty(translateAnimationForImg, new PropertyPath("(UIElement.RenderTransform).(TranslateTransform.X)"));
+
+                // Добавляем анимации для ImgAnimated в Storyboard
+                var storyboard = new Storyboard();
+                storyboard.Children.Add(fadeAnimation);
+                storyboard.Children.Add(translateAnimation);
+                storyboard.Children.Add(fadeAnimationForImg);
+                storyboard.Children.Add(translateAnimationForImg);
+
+                storyboard.Begin();
+            }
+            else
+            {
+                // Если ImgAnimated отсутствует, запускаем анимацию только для AnimatedBack
+                var storyboard = new Storyboard();
+                storyboard.Children.Add(fadeAnimation);
+                storyboard.Children.Add(translateAnimation);
+                storyboard.Begin();
+            }
         }
 
         private void StartTypingAnimation(int index)
@@ -203,6 +278,11 @@ namespace Amalgama.View.Pages
         private void ArrowBut_MouseDown(object sender, MouseButtonEventArgs e)
         {
             CoreNavigate.NavigatorCore.Navigate(new MastersPage());
+        }
+
+        private void RecButtom_Click(object sender, RoutedEventArgs e)
+        {
+            CoreNavigate.NavigatorCore.Navigate(new RecordPage());
         }
     }
 }
