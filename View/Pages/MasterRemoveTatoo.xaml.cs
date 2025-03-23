@@ -33,6 +33,22 @@ namespace Amalgama.View.Pages
         private (string Text, bool IsBold)[][] _paragraphstitle;
         private (string Text, bool IsBold)[][] _paragraphstitle2;
 
+        string[] imagePaths =
+           {
+        "/Images/MastersPersonalDate/RemoweWorks/1.png",
+        "/Images/MastersPersonalDate/RemoweWorks/2.png",
+        "/Images/MastersPersonalDate/RemoweWorks/3.png",
+        "/Images/MastersPersonalDate/RemoweWorks/4.png",
+        "/Images/MastersPersonalDate/RemoweWorks/5.png",
+        "/Images/MastersPersonalDate/RemoweWorks/6.png",
+        "/Images/MastersPersonalDate/RemoweWorks/7.png",
+        "/Images/MastersPersonalDate/RemoweWorks/8.png",
+        "/Images/MastersPersonalDate/RemoweWorks/9.png",
+        "/Images/MastersPersonalDate/RemoweWorks/10.png",
+        "/Images/MastersPersonalDate/RemoweWorks/11.png",
+        "/Images/MastersPersonalDate/RemoweWorks/12.png"
+    };
+
         public MasterRemoveTatoo()
         {
             InitializeComponent();
@@ -40,6 +56,7 @@ namespace Amalgama.View.Pages
             StartTypingAnimation(0);
             AnimateButtonGrid();
             AnimateImage();
+            LoadGallery();
         }
 
         private void InitializeTextBlocksAndParagraphs()
@@ -283,6 +300,60 @@ namespace Amalgama.View.Pages
         private void RecButtom_Click(object sender, RoutedEventArgs e)
         {
             CoreNavigate.NavigatorCore.Navigate(new RecordPage());
+        }
+        private void LoadGallery()
+        {
+           
+            int columns = 4;
+            int rows = (int)Math.Ceiling((double)imagePaths.Length / columns);
+
+            GalleryGrid.Columns = columns;
+            GalleryGrid.Rows = rows;
+
+            foreach (var path in imagePaths)
+            {
+                var image = new Image
+                {
+                    Source = new BitmapImage(new Uri(path, UriKind.Relative)),
+                    Stretch = Stretch.UniformToFill,
+                    Width = 250,
+                    Height = 250,
+                    Margin = new Thickness(2),
+                    Style = (Style)FindResource("PfotoContainer"),
+                    Tag = path  // Сохраняем путь в Tag
+                };
+
+                // Добавляем обработчик клика
+                image.MouseLeftButtonDown += Image_Click;
+
+                GalleryGrid.Children.Add(image);
+            }
+
+        }
+        private void Image_Click(object sender, MouseButtonEventArgs e)
+        {
+            // Проверяем, что sender действительно является Image
+            if (sender is Image image && image.Tag is string imagePath)
+            {
+                // Получаем индекс текущего изображения в массиве imagePaths
+                int currentIndex = Array.IndexOf(imagePaths, imagePath);
+
+                // Проверяем, что индекс найден
+                if (currentIndex != -1)
+                {
+                    // Создаем экземпляр PhotoViewWindow и передаем массив изображений и индекс
+                    var viewer = new PhotoViewWindow(imagePaths, currentIndex);
+                    viewer.ShowDialog(); // Показываем окно
+                }
+                else
+                {
+                    MessageBox.Show("Ошибка: изображение не найдено в массиве.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Ошибка: невозможно открыть изображение.");
+            }
         }
     }
 }

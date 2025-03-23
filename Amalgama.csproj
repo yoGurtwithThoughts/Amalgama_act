@@ -34,10 +34,25 @@
     <None Remove="Images\LeftImage.jpg" />
     <None Remove="Images\mainBanner.png" />
     <None Remove="Images\mastersBackground.jpg" />
+    <None Remove="Images\MastersPersonalDate\Icons\left.png" />
+    <None Remove="Images\MastersPersonalDate\Icons\rihgt.png" />
     <None Remove="Images\MastersPersonalDate\MasterAngelina.png" />
     <None Remove="Images\MastersPersonalDate\MasterArisha.png" />
     <None Remove="Images\MastersPersonalDate\MasterBackground.png" />
     <None Remove="Images\MastersPersonalDate\MasterMaria.jpg" />
+    <None Remove="Images\MastersPersonalDate\Overlay.png" />
+    <None Remove="Images\MastersPersonalDate\RemoweWorks\1.png" />
+    <None Remove="Images\MastersPersonalDate\RemoweWorks\10.png" />
+    <None Remove="Images\MastersPersonalDate\RemoweWorks\11.png" />
+    <None Remove="Images\MastersPersonalDate\RemoweWorks\12.png" />
+    <None Remove="Images\MastersPersonalDate\RemoweWorks\2.png" />
+    <None Remove="Images\MastersPersonalDate\RemoweWorks\3.png" />
+    <None Remove="Images\MastersPersonalDate\RemoweWorks\4.png" />
+    <None Remove="Images\MastersPersonalDate\RemoweWorks\5.png" />
+    <None Remove="Images\MastersPersonalDate\RemoweWorks\6.png" />
+    <None Remove="Images\MastersPersonalDate\RemoweWorks\7.png" />
+    <None Remove="Images\MastersPersonalDate\RemoweWorks\8.png" />
+    <None Remove="Images\MastersPersonalDate\RemoweWorks\9.png" />
     <None Remove="Images\mBanner.png" />
     <None Remove="Images\Nikita.jpg" />
     <None Remove="Images\NIKITA.png" />
@@ -142,6 +157,12 @@
     <Resource Include="Images\mastersBackground.jpg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Images\MastersPersonalDate\Icons\left.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\MastersPersonalDate\Icons\rihgt.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\MastersPersonalDate\MasterAngelina.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
@@ -152,6 +173,45 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\MastersPersonalDate\MasterMaria.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\MastersPersonalDate\Overlay.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\MastersPersonalDate\RemoweWorks\1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\MastersPersonalDate\RemoweWorks\10.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\MastersPersonalDate\RemoweWorks\11.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\MastersPersonalDate\RemoweWorks\12.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\MastersPersonalDate\RemoweWorks\2.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\MastersPersonalDate\RemoweWorks\3.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\MastersPersonalDate\RemoweWorks\4.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\MastersPersonalDate\RemoweWorks\5.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\MastersPersonalDate\RemoweWorks\6.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\MastersPersonalDate\RemoweWorks\7.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\MastersPersonalDate\RemoweWorks\8.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\MastersPersonalDate\RemoweWorks\9.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\mBanner.png">
