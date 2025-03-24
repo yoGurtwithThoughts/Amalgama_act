@@ -12,21 +12,15 @@
         WindowStartupLocation="CenterScreen"
         Title="PhotoViewWindow" Height="750" Width="1000">
     <Grid>
-        <!-- Полупрозрачный фон -->
         <Image Source="/Images/MastersPersonalDate/Overlay.png" 
                Stretch="Fill"/>
-
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
-                <!-- Кнопка слева -->
                 <ColumnDefinition Width="*"/>
-                <!-- Центральная область для изображения -->
                 <ColumnDefinition Width="Auto"/>
-                <!-- Кнопка справа -->
             </Grid.ColumnDefinitions>
 
-            <!-- Стрелка "Назад" слева -->
             <Image Source="/Images/MastersPersonalDate/Icons/left.png" 
                    Width="50" Height="50" 
                    MouseLeftButtonDown="PreviousButton_Click" 
@@ -35,7 +29,6 @@
                    HorizontalAlignment="Left" 
                    Margin="10"/>
 
-            <!-- Изображение в центре -->
             <Border Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Image x:Name="DisplayedImage"
                        MaxHeight="500" 

@@ -474,6 +474,8 @@ namespace Amalgama.View.Pages
             AdminSigIn adminSignInWindow = new AdminSigIn();
 
             adminSignInWindow.ShowDialog();
+
+
         }
     }
 }

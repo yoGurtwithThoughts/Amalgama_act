@@ -24,6 +24,29 @@
             </Setter.Value>
         </Setter>
     </Style>
+    <Style x:Key="CustomTextPField" TargetType="PasswordBox">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="IsEnabled" Value="True"/>
+        <Setter Property="Height" Value="40"/>
+        <Setter Property="Width" Value="285"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="FontFamily" Value="pack://application:,,,/Amalgama;component/Fonts/#Jura"/>
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Border Background="{x:Null}"
+                          BorderBrush="{x:Null}">
+                        <ScrollViewer x:Name="PART_ContentHost" Focusable="False"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
     <Style x:Key="BorderStyleBackground" TargetType="Border">
         <Setter Property="Background" Value="#30FFFFFF"/>
         <Setter Property="CornerRadius" Value="15"/>

@@ -29,16 +29,7 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <Style x:Key="MatteGlassBorder" TargetType="Border">
-        <Setter Property="Background">
-            <Setter.Value>
-                <SolidColorBrush Color="#FFFFFF" Opacity="0.3"/>
-            </Setter.Value>
-        </Setter>
-        <Setter Property="HorizontalAlignment" Value="Center"/>
-        <Setter Property="VerticalAlignment" Value="Center"/>
-    </Style>
-
+   
     <Style x:Key="SignBorder" TargetType="Border">
         <Setter Property="Background">
             <Setter.Value>
@@ -108,4 +99,5 @@
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="Background" Value="Transparent"/>
     </Style>
+    
 </ResourceDictionary>

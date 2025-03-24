@@ -59,7 +59,7 @@
                     <Rectangle.Effect>
                         <BlurEffect x:Name="BackgroundBlur" Radius="25" />
                     </Rectangle.Effect>
-                    </Rectangle>
+                </Rectangle>
             </Grid>
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
@@ -67,8 +67,8 @@
                     <RowDefinition Height="*" />
                     <RowDefinition Height="45"/>
                 </Grid.RowDefinitions>
-             
-                    <materialDesign:ColorZone Padding="16" 
+
+                <materialDesign:ColorZone Padding="16" 
                                               Mode="Inverted" 
                                               Grid.Row="1"
                                                Panel.ZIndex="5">
@@ -122,7 +122,7 @@
                                         FontSize="25"
                                         Click="Record_Click" 
                                         Style="{StaticResource LightButton}"/>
-                              
+
                             </StackPanel>
                             <Button x:Name="SignAdmin"
                                   VerticalAlignment="Bottom"
@@ -172,7 +172,7 @@
                                  Height="230"
                                  x:Name="moreButton"
                                  Opacity="1"
-                                 RenderTransformOrigin="0.5,0.5">   
+                                 RenderTransformOrigin="0.5,0.5">
                         <StackPanel.RenderTransform>
                             <TranslateTransform X="-50" Y="0" />
                         </StackPanel.RenderTransform>
@@ -181,12 +181,12 @@
                                  VerticalAlignment="Top" Height="41">
                             <Image Source="/Images/black.png" />
                         </Border>
-                                <Border Width="7.8" />
-                                <Border x:Name="TG"
+                        <Border Width="7.8" />
+                        <Border x:Name="TG"
                                        MouseDown="TG_MouseDown">
                             <Image Source="/Images/black1.png" 
                                    Height="41"
-                                   VerticalAlignment="Top" />  
+                                   VerticalAlignment="Top" />
                         </Border>
                     </StackPanel>
                 </Grid>
