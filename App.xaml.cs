@@ -1,4 +1,5 @@
 ﻿using Amalgama.Core;
+using Amalgama.Servis;
 using System.Configuration;
 using System.Data;
 using System.Windows;
@@ -14,6 +15,9 @@ namespace Amalgama
         {
             base.OnStartup(e);
             FontLoader.LoadFonts();
+
+            var dbContext = new DBConnection.ApplicationDbContext();
+            dbContext.InitializeDatabaseAsync();
         }
     }
 

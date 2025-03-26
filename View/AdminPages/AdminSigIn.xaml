@@ -74,8 +74,8 @@
                     <Border Style="{StaticResource BorderStyleBackground}"
                             Margin="0 15 0 0" >
                         <TextBox x:Name="Login"
-                                 TextChanged="Login_TextChanged"
-                                Style="{StaticResource CustomTextField}"/>
+                                 VerticalContentAlignment="Center"
+                                 Style="{StaticResource CustomTextField}"/>
                     </Border>
                     <TextBlock Text="Пароль"
                                Margin="0 8 0 0"
@@ -85,27 +85,9 @@
                         <StackPanel Orientation="Horizontal">
                             <TextBox x:Name="Password"
                                      Style="{StaticResource CustomTextField}"
-                                     HorizontalContentAlignment="Center"
+                                     HorizontalContentAlignment="Left"
                                      VerticalContentAlignment="Center"
-                                     TextChanged="Password_TextChanged"
-                                     Text="{Binding ElementName=Password, Path=Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                            <!--<Button x:Name="TogglePasswordButton"
-                                    Width="30"
-                                    Height="30"
-                                    HorizontalAlignment="Right"
-                                    VerticalAlignment="Center"
-                                    Margin="0,0,15,0"
-                                    Background="Transparent"
-                                    BorderThickness="0"
-                                    Focusable="False"
-                                    Click="TogglePasswordVisibility_Click">
-                                <Button.Content>
-                                    <materialDesign:PackIcon 
-                                            x:Name="PasswordIcon"
-                                            Kind="Eye"
-                                            Foreground="White" />       
-                                </Button.Content>
-                            </Button>-->
+                                     TextChanged="Password_TextChanged"/>
                         </StackPanel>
                     </Border>
                     <Canvas>

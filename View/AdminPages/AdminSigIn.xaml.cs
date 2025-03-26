@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Amalgama.Servis;
 using Amalgama.View.Pages;
 using MaterialDesignThemes.Wpf;
 using Microsoft.EntityFrameworkCore;
@@ -25,7 +26,10 @@ namespace Amalgama.View.AdminPages
     /// </summary>
     public partial class AdminSigIn : Window
     {
-        private bool isPasswordVisible = false;
+        private string _realPassword = string.Empty;
+        private string _previousText = string.Empty;
+        private bool _isUpdatingText = false;
+        private DBConnection.ApplicationDbContext _db = new DBConnection.ApplicationDbContext();
 
         public AdminSigIn()
             {
@@ -38,70 +42,95 @@ namespace Amalgama.View.AdminPages
                 // Отображаем матовый фон при загрузке
                 Overlay.Visibility = Visibility.Visible;
             }
+        private void Password_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (_isUpdatingText)
+                return;
 
-            private void Login_TextChanged(object sender, TextChangedEventArgs e)
+            try
             {
-                // Логика для изменения текста логина (если необходимо)
-            }
+                string currentText = Password.Text;
 
-            private void Password_TextChanged(object sender, RoutedEventArgs e)
-            {
-                
-            }
-            private void TogglePasswordVisibility_Click(object sender, RoutedEventArgs e)
-            {
-                
-            }
+                // Проверяем разницу между введённым текстом и предыдущим состоянием
+                if (currentText.Length < _previousText.Length)
+                {
+                    // Удаление символа
+                    _realPassword = _realPassword.Substring(0, Math.Max(0, _realPassword.Length - (_previousText.Length - currentText.Length)));
+                }
+                else if (currentText.Length > _previousText.Length)
+                {
+                    // Добавление символа
+                    int addedLength = currentText.Length - _previousText.Length;
+                    _realPassword += currentText.Substring(_previousText.Length, addedLength);
+                }
 
+                _isUpdatingText = true;
+
+                // Заменяем вводимые символы на точки
+                Password.Text = new string('●', _realPassword.Length);
+                Password.CaretIndex = Password.Text.Length;
+
+                _previousText = Password.Text;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Ошибка при обработке текста: {ex.Message}");
+            }
+            finally
+            {
+                _isUpdatingText = false;
+            }
+        }
 
         private void CloseDialog_Click(object sender, RoutedEventArgs e)
             {
                 this.Close();
             }
 
-        //private async Task SignUp_MouseDownAsync(object sender, MouseButtonEventArgs e)
-        //{
-        //    string username = Login.Text;
-        //    string password = Password.Text;
-
-        //    using (var dbContext = new ApplicationDbContext())
-        //    {
-        //        // Here, we're directly checking the hardcoded credentials.
-        //        var user = await dbContext.Users.FirstOrDefaultAsync(u => u.Login == username && u.Password == password);
-
-        //        if (user != null)
-        //        {
-        //            // Navigate to another page on successful login
-        //            var nextPage = new DataRecForAdmin(); // Replace DataRecForAdmin with your actual page class
-        //            CoreNavigate.NavigatorCore.Navigate(nextPage);
-        //        }
-        //        else
-        //        {
-        //            MessageBox.Show("Неверное имя пользователя или пароль.");
-        //        }
-        //    }
-        //}
-
-        private async void SignUp_MouseDown(object sender, MouseButtonEventArgs e)
+        private void SignUp_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            string username = Login.Text;
-            string password = Password.Text;
-
-            using (var dbContext = new ApplicationDbContext())
+            if (string.IsNullOrWhiteSpace(Login.Text) || string.IsNullOrWhiteSpace(_realPassword))
             {
-                // Check the hardcoded credentials in the database.
-                var user = await dbContext.Users.FirstOrDefaultAsync(u => u.Login == username && u.Password == password);
+                MessageBox.Show("Логин и пароль не могут быть пустыми.",
+                    "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
 
+            string username = Login.Text.Trim();
+            string password = _realPassword; // Используем введённый пользователем пароль
+
+            try
+            {
+                if (_db == null || _db.Users == null)
+                {
+                    MessageBox.Show("Ошибка инициализации базы данных.",
+                        "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
+                var user = _db.Users.FirstOrDefault(x => x.Login == username && x.Password == password);
                 if (user != null)
                 {
-                    // Navigate to another page on successful login
-                    var nextPage = new DataRecForAdmin(); // Replace DataRecForAdmin with your actual page class
-                    CoreNavigate.NavigatorCore.Navigate(nextPage);
+                    CoreNavigate.NavigatorCore.Navigate(new DataRecForAdmin());
+
+                    Window currentWindow = Window.GetWindow(this);
+                    currentWindow?.Close();
                 }
                 else
                 {
-                    MessageBox.Show("Неверное имя пользователя или пароль.");
+                    MessageBox.Show("Ошибка ввода данных: неверный логин или пароль.",
+                        "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    Login.Text = string.Empty;
+                    Password.Text = string.Empty;
+                    _realPassword = string.Empty; // Очищаем сохранённый пароль
                 }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Произошла ошибка: {ex.Message}");
+
+                MessageBox.Show($"Произошла ошибка при работе с базой данных: {ex.Message}",
+                    "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

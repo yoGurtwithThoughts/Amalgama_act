@@ -20,9 +20,50 @@ namespace Amalgama.View.AdminPages
     /// </summary>
     public partial class DataRecForAdmin : Page
     {
+        private bool isMenuOpen = false;
         public DataRecForAdmin()
         {
             InitializeComponent();
+        }
+
+        private void CloseButton_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private void ToggleButton_Click(object sender, RoutedEventArgs e)
+        {
+            DrawerHost.IsRightDrawerOpen = !DrawerHost.IsRightDrawerOpen;
+            if (DrawerHost.IsRightDrawerOpen)
+            {
+                BlurOverlay.Visibility = Visibility.Visible;
+                BackgroundBlur.Radius = 25; // Активируем размытие
+            }
+            else
+            {
+                BlurOverlay.Visibility = Visibility.Visible;
+                BackgroundBlur.Radius = 0; // Активируем размытие
+            }
+        }
+
+        private void SignOut_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Gallery_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Masters_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void QW_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

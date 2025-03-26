@@ -14,6 +14,7 @@
     <None Remove="Fonts\Jura.ttf" />
     <None Remove="Images\AMALGAMA.png" />
     <None Remove="Images\ArrowBackButton.png" />
+    <None Remove="Images\Bacground.png" />
     <None Remove="Images\BackBanner.png" />
     <None Remove="Images\BackSign.png" />
     <None Remove="Images\bannerbackground.png" />
@@ -109,6 +110,9 @@
 
   <ItemGroup>
     <Resource Include="Images\ArrowBackButton.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Bacground.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\BackBanner.png">

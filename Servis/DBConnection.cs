@@ -11,7 +11,7 @@ namespace Amalgama.Servis
     {
         public class ApplicationDbContext : DbContext
         {
-            public DbSet<User> Users { get; set; }
+            public DbSet<Users> Users { get; set; }
 
             protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             {
@@ -20,16 +20,15 @@ namespace Amalgama.Servis
 
             public async Task InitializeDatabaseAsync()
             {
-                await Database.EnsureCreatedAsync(); // Create database if it doesn't exist
+                await Database.EnsureCreatedAsync(); // Создаем базу данных, если она не существует
 
-                // Check if the default user already exists
+                // Проверяем, существует ли тестовый пользователь
                 if (!await Users.AnyAsync(u => u.Login == "Test"))
                 {
-                    // Create a new user with the predefined credentials
-                    var defaultUser = new User
+                    var defaultUser = new Users
                     {
                         Login = "Test",
-                        Password = "Test" // Make sure to hash the password for security in a real app
+                        Password = "Test" // Пароль в открытом виде
                     };
 
                     Users.Add(defaultUser);
@@ -38,11 +37,11 @@ namespace Amalgama.Servis
             }
         }
 
-        public class User
+        public class Users
         {
             public int Id { get; set; }
             public string Login { get; set; }
-            public string Password { get; set; } // Store hashed passwords for security
+            public string Password { get; set; } // Пароль в открытом виде
         }
     }
-}
+    }
