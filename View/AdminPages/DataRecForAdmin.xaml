@@ -80,7 +80,6 @@
                     <RowDefinition Height="*" />
                     <RowDefinition Height="45"/>
                 </Grid.RowDefinitions>
-
                 <materialDesign:ColorZone Padding="16" 
                                   Mode="Inverted" 
                                   Grid.Row="1"

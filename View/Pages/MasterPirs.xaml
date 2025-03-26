@@ -247,7 +247,19 @@
                 Grid.Column="1">
                 <UniformGrid x:Name="GalleryGrid" 
                          Columns="4" 
-                         Rows="3" />
+                         Rows="3">
+                    <Button x:Name="AddImageButton" 
+                           Content="+"
+                           Visibility="Collapsed"
+                           Click="AddImage_Click"
+                           Background="#C1C1C1"
+                           BorderBrush="#FFFFFF"
+                           Foreground="#FFFFFF"
+                           FontSize="25"
+                           Height="185"
+                           Width="185"
+                           Margin="10"/>    
+                </UniformGrid>
             </Border>
         </Grid>
     </ScrollViewer>

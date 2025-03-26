@@ -26,6 +26,7 @@ namespace Amalgama.View.AdminPages
     /// </summary>
     public partial class AdminSigIn : Window
     {
+        private bool _isAdmin;
         private string _realPassword = string.Empty;
         private string _previousText = string.Empty;
         private bool _isUpdatingText = false;
@@ -109,8 +110,19 @@ namespace Amalgama.View.AdminPages
                 }
 
                 var user = _db.Users.FirstOrDefault(x => x.Login == username && x.Password == password);
+
                 if (user != null)
                 {
+                    // Устанавливаем пользователя в сессию
+                    SessionManager.SetUser(user);
+
+                    if (!user.IsAdmin)
+                    {
+                        MessageBox.Show("Доступ разрешён только администраторам.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        return;
+                    }
+
+                    // Навигация для админа
                     CoreNavigate.NavigatorCore.Navigate(new DataRecForAdmin());
 
                     Window currentWindow = Window.GetWindow(this);
@@ -122,7 +134,7 @@ namespace Amalgama.View.AdminPages
                         "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                     Login.Text = string.Empty;
                     Password.Text = string.Empty;
-                    _realPassword = string.Empty; // Очищаем сохранённый пароль
+                    _realPassword = string.Empty;
                 }
             }
             catch (Exception ex)

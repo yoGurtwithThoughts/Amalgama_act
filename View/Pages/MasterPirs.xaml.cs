@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +25,7 @@ namespace Amalgama.View.Pages
     /// </summary>
     public partial class MasterPirs : Page
     {
+        private bool _isAdmin;
         private DispatcherTimer _textTimer;
         private int _currentIndex;
         private int _currentParagraphIndex;
@@ -320,7 +323,6 @@ namespace Amalgama.View.Pages
         }
         private void LoadGallery()
         {
-
             int columns = 4;
             int rows = (int)Math.Ceiling((double)imagePaths.Length / columns);
 
@@ -337,39 +339,56 @@ namespace Amalgama.View.Pages
                     Height = 250,
                     Margin = new Thickness(2),
                     Style = (Style)FindResource("PfotoContainer"),
-                    Tag = path  // Сохраняем путь в Tag
+                    Tag = path
                 };
 
-                // Добавляем обработчик клика
-                image.MouseLeftButtonDown += Image_Click;
-
+                image.MouseLeftButtonDown += AddImage_Click;
                 GalleryGrid.Children.Add(image);
             }
 
+            // Если пользователь — админ, показываем кнопку "Добавить фото"
+            AddImageButton.Visibility = _isAdmin ? Visibility.Visible : Visibility.Collapsed;
         }
-        private void Image_Click(object sender, MouseButtonEventArgs e)
+        private void AddImage_Click(object sender, RoutedEventArgs e)
         {
-            // Проверяем, что sender действительно является Image
-            if (sender is Image image && image.Tag is string imagePath)
+            if (!_isAdmin)
             {
-                // Получаем индекс текущего изображения в массиве imagePaths
-                int currentIndex = Array.IndexOf(imagePaths, imagePath);
-
-                // Проверяем, что индекс найден
-                if (currentIndex != -1)
-                {
-                    // Создаем экземпляр PhotoViewWindow и передаем массив изображений и индекс
-                    var viewer = new PhotoViewWindow(imagePaths, currentIndex);
-                    viewer.ShowDialog(); // Показываем окно
-                }
-                else
-                {
-                    MessageBox.Show("Ошибка: изображение не найдено в массиве.");
-                }
+                MessageBox.Show("У вас нет прав на добавление изображений!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
             }
-            else
+
+            // Открываем диалог выбора файла
+            OpenFileDialog openFileDialog = new OpenFileDialog
             {
-                MessageBox.Show("Ошибка: невозможно открыть изображение.");
+                Filter = "Изображения|*.jpg;*.jpeg;*.png;*.bmp",
+                Title = "Выберите изображение"
+            };
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                string selectedPath = openFileDialog.FileName;
+
+                // Генерируем путь для сохранения в ресурсах приложения
+                string appDirectory = AppDomain.CurrentDomain.BaseDirectory;
+                string targetPath = System.IO.Path.Combine(appDirectory, "Images/MastersPersonalDate/PirsWorks", System.IO.Path.GetFileName(selectedPath));
+
+                try
+                {
+                    // Копируем файл в папку приложения
+                    File.Copy(selectedPath, targetPath, true);
+
+                    // Добавляем новый путь в массив imagePaths
+                    List<string> updatedPaths = imagePaths.ToList();
+                    updatedPaths.Add(targetPath);
+                    imagePaths = updatedPaths.ToArray();
+
+                    // Перерисовываем галерею
+                    LoadGallery();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Ошибка при сохранении изображения: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
         }
     }
