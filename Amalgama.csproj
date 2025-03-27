@@ -32,6 +32,7 @@
     <None Remove="Images\GalleryImagesPirsing\OstinBar.jpg" />
     <None Remove="Images\GalleryImagesPirsing\Septrill.jpg" />
     <None Remove="Images\GalleryImagesPirsing\SeptumPirc.jpg" />
+    <None Remove="Images\infobanner.jpg" />
     <None Remove="Images\Laura.jpg" />
     <None Remove="Images\laura.png" />
     <None Remove="Images\LeftImage.jpg" />
@@ -186,6 +187,9 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\GalleryImagesPirsing\SeptumPirc.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\infobanner.jpg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\Laura.jpg">

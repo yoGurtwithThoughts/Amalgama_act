@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -25,7 +26,7 @@ namespace Amalgama.View.Pages
     /// </summary>
     public partial class MasterPirs : Page
     {
-        private bool _isAdmin;
+        private bool _isAdmin = true;
         private DispatcherTimer _textTimer;
         private int _currentIndex;
         private int _currentParagraphIndex;
@@ -74,6 +75,7 @@ namespace Amalgama.View.Pages
             StartTypingAnimation(0);
             AnimateButtonGrid();
             AnimateImage();
+            AddImageButton.Visibility = _isAdmin ? Visibility.Visible : Visibility.Collapsed;
             LoadGallery();
         }
 
@@ -328,6 +330,7 @@ namespace Amalgama.View.Pages
 
             GalleryGrid.Columns = columns;
             GalleryGrid.Rows = rows;
+            GalleryGrid.Children.Clear(); // Очищаем детей перед загрузкой новой галереи
 
             foreach (var path in imagePaths)
             {
@@ -342,13 +345,28 @@ namespace Amalgama.View.Pages
                     Tag = path
                 };
 
-                image.MouseLeftButtonDown += AddImage_Click;
-                GalleryGrid.Children.Add(image);
+                image.MouseLeftButtonDown += (sender, e) => OpenPhotoViewWindow(path);
+
+                // Добавляем изображение только если его еще нет в галерее
+                if (!GalleryGrid.Children.OfType<Image>().Any(img => img.Tag?.ToString() == path))
+                {
+                    GalleryGrid.Children.Add(image);
+                }
             }
 
             // Если пользователь — админ, показываем кнопку "Добавить фото"
             AddImageButton.Visibility = _isAdmin ? Visibility.Visible : Visibility.Collapsed;
         }
+        private void OpenPhotoViewWindow(string imagePath)
+        {
+            // Получаем индекс текущего изображения
+            int currentIndex = Array.IndexOf(imagePaths, imagePath);
+
+            // Открываем окно просмотра изображений
+            PhotoViewWindow photoViewWindow = new PhotoViewWindow(imagePaths, currentIndex);
+            photoViewWindow.ShowDialog(); // Используйте ShowDialog, чтобы открыть окно модально
+        }
+
         private void AddImage_Click(object sender, RoutedEventArgs e)
         {
             if (!_isAdmin)
@@ -357,39 +375,48 @@ namespace Amalgama.View.Pages
                 return;
             }
 
-            // Открываем диалог выбора файла
             OpenFileDialog openFileDialog = new OpenFileDialog
             {
                 Filter = "Изображения|*.jpg;*.jpeg;*.png;*.bmp",
                 Title = "Выберите изображение"
             };
 
-            if (openFileDialog.ShowDialog() == true)
+            if (openFileDialog.ShowDialog() == true && !string.IsNullOrEmpty(openFileDialog.FileName))
             {
                 string selectedPath = openFileDialog.FileName;
 
-                // Генерируем путь для сохранения в ресурсах приложения
                 string appDirectory = AppDomain.CurrentDomain.BaseDirectory;
-                string targetPath = System.IO.Path.Combine(appDirectory, "Images/MastersPersonalDate/PirsWorks", System.IO.Path.GetFileName(selectedPath));
+                string targetDirectory = System.IO.Path.Combine(appDirectory, "Images/MastersPersonalDate/PirsWorks");
+
+                // Создаем целевую директорию, если она не существует
+                if (!Directory.Exists(targetDirectory))
+                {
+                    Directory.CreateDirectory(targetDirectory);
+                }
+
+                string targetPath = System.IO.Path.Combine(targetDirectory, System.IO.Path.GetFileName(selectedPath));
+                string relativePath = $"Images/MastersPersonalDate/PirsWorks/{System.IO.Path.GetFileName(selectedPath)}";
 
                 try
                 {
-                    // Копируем файл в папку приложения
                     File.Copy(selectedPath, targetPath, true);
 
-                    // Добавляем новый путь в массив imagePaths
-                    List<string> updatedPaths = imagePaths.ToList();
-                    updatedPaths.Add(targetPath);
-                    imagePaths = updatedPaths.ToArray();
+                    // Обновляем массив путей
+                    imagePaths = imagePaths.Append(relativePath).ToArray();
 
-                    // Перерисовываем галерею
-                    LoadGallery();
+                    // Обновляем галерею
+                    LoadGallery(); // Здесь мы перезагружаем галерею
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show($"Ошибка при сохранении изображения: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
+            else
+            {
+                MessageBox.Show("Файл не выбран.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
+
     }
 }

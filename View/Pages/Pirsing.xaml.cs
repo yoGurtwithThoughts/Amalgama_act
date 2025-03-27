@@ -248,18 +248,19 @@ namespace Amalgama.View.Pages
         private void Pirc_Nose_Click(object sender, RoutedEventArgs e)
         {
             SetButtonStyles(Pirc_Nose, Pirc_Lips, EarsEyeBrow_Lips);
-            CoreNavigate.NavigatorCore.Navigate(new Gallery());
+            CoreNavigate.NavigatorCore.Navigate(new NoseGalleryPirs());
         }
 
         private void Pirc_Lips_Click(object sender, RoutedEventArgs e)
         {
             SetButtonStyles(Pirc_Lips, Pirc_Nose, EarsEyeBrow_Lips);
-
+            CoreNavigate.NavigatorCore.Navigate(new LipsGalleryPirs());
         }
 
         private void EarsEyeBrow_Lips_Click(object sender, RoutedEventArgs e)
         {
             SetButtonStyles(EarsEyeBrow_Lips, Pirc_Nose, Pirc_Lips);
+            CoreNavigate.NavigatorCore.Navigate(new EyebrowGalleryPirs());
         }
         private void SetButtonStyles(Button activeButton, Button button2, Button button3)
         {

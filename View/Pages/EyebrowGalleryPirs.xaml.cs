@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Amalgama.View.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для Gallery.xaml
+    /// Логика взаимодействия для EyebrowGalleryPirs.xaml
     /// </summary>
-    public partial class Gallery : Page
+    public partial class EyebrowGalleryPirs : Page
     {
-        public Gallery()
+        public EyebrowGalleryPirs()
         {
             InitializeComponent();
         }

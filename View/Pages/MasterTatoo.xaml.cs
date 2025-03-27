@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +25,7 @@ namespace Amalgama.View.Pages
     /// </summary>
     public partial class MasterTatoo : Page
     {
+        private bool _isAdmin = true;
         private DispatcherTimer _textTimer;
         private int _currentIndex;
         private int _currentParagraphIndex;
@@ -303,12 +306,12 @@ namespace Amalgama.View.Pages
         }
         private void LoadGallery()
         {
-
             int columns = 4;
             int rows = (int)Math.Ceiling((double)imagePaths.Length / columns);
 
             GalleryGrid.Columns = columns;
             GalleryGrid.Rows = rows;
+            GalleryGrid.Children.Clear(); // Очищаем детей перед загрузкой новой галереи
 
             foreach (var path in imagePaths)
             {
@@ -320,16 +323,82 @@ namespace Amalgama.View.Pages
                     Height = 250,
                     Margin = new Thickness(2),
                     Style = (Style)FindResource("PfotoContainer"),
-                    Tag = path  // Сохраняем путь в Tag
+                    Tag = path
                 };
 
-                // Добавляем обработчик клика
-                image.MouseLeftButtonDown += Image_Click;
+                image.MouseLeftButtonDown += (sender, e) => OpenPhotoViewWindow(path);
 
-                GalleryGrid.Children.Add(image);
+                // Добавляем изображение только если его еще нет в галерее
+                if (!GalleryGrid.Children.OfType<Image>().Any(img => img.Tag?.ToString() == path))
+                {
+                    GalleryGrid.Children.Add(image);
+                }
             }
 
+            // Если пользователь — админ, показываем кнопку "Добавить фото"
+            AddImageButton.Visibility = _isAdmin ? Visibility.Visible : Visibility.Collapsed;
         }
+        private void OpenPhotoViewWindow(string imagePath)
+        {
+            // Получаем индекс текущего изображения
+            int currentIndex = Array.IndexOf(imagePaths, imagePath);
+
+            // Открываем окно просмотра изображений
+            PhotoViewWindow photoViewWindow = new PhotoViewWindow(imagePaths, currentIndex);
+            photoViewWindow.ShowDialog(); // Используйте ShowDialog, чтобы открыть окно модально
+        }
+
+        private void AddImage_Click(object sender, RoutedEventArgs e)
+        {
+            if (!_isAdmin)
+            {
+                MessageBox.Show("У вас нет прав на добавление изображений!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                Filter = "Изображения|*.jpg;*.jpeg;*.png;*.bmp",
+                Title = "Выберите изображение"
+            };
+
+            if (openFileDialog.ShowDialog() == true && !string.IsNullOrEmpty(openFileDialog.FileName))
+            {
+                string selectedPath = openFileDialog.FileName;
+
+                string appDirectory = AppDomain.CurrentDomain.BaseDirectory;
+                string targetDirectory = System.IO.Path.Combine(appDirectory, "Images/MastersPersonalDate/PirsWorks");
+
+                // Создаем целевую директорию, если она не существует
+                if (!Directory.Exists(targetDirectory))
+                {
+                    Directory.CreateDirectory(targetDirectory);
+                }
+
+                string targetPath = System.IO.Path.Combine(targetDirectory, System.IO.Path.GetFileName(selectedPath));
+                string relativePath = $"Images/MastersPersonalDate/PirsWorks/{System.IO.Path.GetFileName(selectedPath)}";
+
+                try
+                {
+                    File.Copy(selectedPath, targetPath, true);
+
+                    // Обновляем массив путей
+                    imagePaths = imagePaths.Append(relativePath).ToArray();
+
+                    // Обновляем галерею
+                    LoadGallery(); // Здесь мы перезагружаем галерею
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Ошибка при сохранении изображения: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Файл не выбран.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
+
         private void Image_Click(object sender, MouseButtonEventArgs e)
         {
             // Проверяем, что sender действительно является Image

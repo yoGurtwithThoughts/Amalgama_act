@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection.Emit;
 using System.Text;
@@ -17,8 +18,6 @@ namespace Amalgama.Servis
             protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             {
                 optionsBuilder.UseSqlite("Data Source=login.db");
-
-             
             }
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
@@ -26,11 +25,23 @@ namespace Amalgama.Servis
 
                 modelBuilder.Entity<User>()
                     .Property(u => u.IsAdmin)
-                    .HasDefaultValue(false); // По умолчанию все пользователи - не админы
+                    .HasDefaultValue(false);
+            }
+            public async Task EnsureDatabaseUpdatedAsync()
+            {
+                await Database.MigrateAsync(); // Автоматически применяет изменения к схеме
             }
             public async Task InitializeDatabaseAsync()
             {
-                await Database.EnsureCreatedAsync(); // Создаем базу данных, если она не существует
+                // Удаляем старую базу данных, если она существует
+                string dbPath = "login.db";
+                if (File.Exists(dbPath))
+                {
+                    File.Delete(dbPath);
+                }
+
+                // Создаем новую базу данных
+                await Database.EnsureCreatedAsync();
 
                 // Проверяем, существует ли тестовый пользователь
                 if (!await Users.AnyAsync(u => u.Login == "Test"))
@@ -48,7 +59,7 @@ namespace Amalgama.Servis
             }
         }
 
-        public class User
+            public class User
         {
             public int Id { get; set; }
             public string Login { get; set; } = string.Empty;

@@ -10,17 +10,27 @@
         <Setter Property="VerticalAlignment" Value="Bottom"/>
         <Setter Property="BorderThickness" Value="0 0 0 0.5"/>
         <Setter Property="FontFamily" Value="pack://application:,,,/Amalgama;component/Fonts/#Jura"/>
-        
+        <!-- Переопределение шаблона для устранения подсветки -->
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                        <ScrollViewer x:Name="PART_ContentHost" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <!-- Триггеры -->
         <Style.Triggers>
             <Trigger Property="IsFocused" Value="True">
                 <Setter Property="Foreground" Value="Black"/>
-            
             </Trigger>
             <Trigger Property="Text" Value="">
                 <Setter Property="Foreground" Value="LightGray"/>
-               
             </Trigger>
         </Style.Triggers>
     </Style>
-    
 </ResourceDictionary>
