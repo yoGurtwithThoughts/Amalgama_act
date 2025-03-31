@@ -58,6 +58,26 @@
                         <RowDefinition Height="50"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
+                    <Canvas Grid.Row="0"
+                        Grid.Column="0">
+                        <StackPanel Orientation="Horizontal"
+                                    Panel.ZIndex="2"
+                                    Grid.Column="1"
+                                    Grid.Row="0" 
+                                    HorizontalAlignment="Left" 
+                                    VerticalAlignment="Center" 
+                                    Width="365">        
+                            <Border x:Name="ArrowBut"
+                                    Grid.Column="2"
+                                    MouseDown="ArrowBut_MouseDown"
+                                    Style="{StaticResource ArrowBackbutton}"
+                                    Margin="15 15 0 0" Width="187">
+                                <Image Source="/Images/ArrowBackButton.png" 
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Left"/>
+                            </Border>
+                        </StackPanel>
+                    </Canvas>
                     <Grid Grid.Row="1">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -69,117 +89,114 @@
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
+                       
                         <StackPanel Grid.Row="0" Grid.Column="0"
                                     Orientation="Vertical">
-                            <TextBlock Text="Септум"
+                            <TextBlock Text="Классический"
                                Style="{StaticResource TitleObject}"/>
-                            <Image Source="/Images/GalleryImagesPirsing/SeptumPirc.jpg" 
+                            <Image Source="/Images/EEPirs/1.png" 
                           Style="{StaticResource PfotoContainer}"
                                    Margin=" 0 15 0 0">
                                 <Image.RenderTransform>
                                     <ScaleTransform ScaleX="1" ScaleY="1"/>
                                 </Image.RenderTransform>
                             </Image>
-                            <TextBlock Text="горизонтальный прокол 
-                               центральной носовой перегородки
-                               с установкой украшения между 
-                               ноздрями"
+                            <TextBlock Text="базовый прокол мочки уха."
                                Style="{StaticResource Topic}"
                                Margin="15"/>
                         </StackPanel>
                         <StackPanel Grid.Row="0" Grid.Column="1"
                                     Orientation="Vertical">
-                            <TextBlock Text="Ноострил"
+                            <TextBlock Text="Тоннель"
                                        Style="{StaticResource TitleObject}"/>
-                            <Image Source="/Images/GalleryImagesPirsing/Noostrill.jpg" 
+                            <Image Source="/Images/EEPirs/2.png"  
                                    Style="{StaticResource PfotoContainer}"
                                    Margin=" 0 15 0 0">
                                 <Image.RenderTransform>
                                     <ScaleTransform ScaleX="1" ScaleY="1"/>
                                 </Image.RenderTransform>
                             </Image>
-                            <TextBlock Text="пирсинг крыла носа."
+                            <TextBlock Text="мочка прокалывается так же, как и при стандартом , 
+                                       растягивается и вставляется тоннель."
                                          Style="{StaticResource Topic}"
                                          Margin="15"/>
                         </StackPanel>
                         <StackPanel Grid.Row="0" Grid.Column="2"
                                     Orientation="Vertical">
-                            <TextBlock Text="Бридж"
+                            <TextBlock Text="Хеликс"
                                        Style="{StaticResource TitleObject}"/>
-                            <Image Source="/Images/GalleryImagesPirsing/Bridge.jpg" 
+                            <Image Source="/Images/EEPirs/3.png" 
                                     Style="{StaticResource PfotoContainer}"
                                     Margin=" 0 15 0 0">
                                 <Image.RenderTransform>
                                     <ScaleTransform ScaleX="1" ScaleY="1"/>
                                 </Image.RenderTransform>
                             </Image>
-                            <TextBlock Text="прокол переносицы"
+                            <TextBlock Text="прокол бокового завитка хряща."
                                        Style="{StaticResource Topic}"
                                        Margin="15"/>
                         </StackPanel>
-                        <StackPanel Grid.Row="0" Grid.Column="2"
-             Orientation="Vertical">
-                            <TextBlock Text="Бридж"
-                Style="{StaticResource TitleObject}"/>
-                            <Image Source="/Images/GalleryImagesPirsing/Bridge.jpg" 
-             Style="{StaticResource PfotoContainer}"
-             Margin=" 0 15 0 0">
-                                <Image.RenderTransform>
-                                    <ScaleTransform ScaleX="1" ScaleY="1"/>
-                                </Image.RenderTransform>
-                            </Image>
-                            <TextBlock Text="прокол переносицы"
-                Style="{StaticResource Topic}"
-                Margin="15"/>
-                        </StackPanel>
                         <StackPanel Grid.Row="1" Grid.Column="0"
              Orientation="Vertical">
-                            <TextBlock Text="Бридж"
+                            <TextBlock Text="Флэт"
                 Style="{StaticResource TitleObject}"/>
-                            <Image Source="/Images/GalleryImagesPirsing/Bridge.jpg" 
+                            <Image Source="/Images/EEPirs/4.png" 
              Style="{StaticResource PfotoContainer}"
              Margin=" 0 15 0 0">
                                 <Image.RenderTransform>
                                     <ScaleTransform ScaleX="1" ScaleY="1"/>
                                 </Image.RenderTransform>
                             </Image>
-                            <TextBlock Text="прокол переносицы"
+                            <TextBlock Text="прокол возле бокового завитка хряща."
                 Style="{StaticResource Topic}"
                 Margin="15"/>
                         </StackPanel>
                         <StackPanel Grid.Row="1" Grid.Column="1"
              Orientation="Vertical">
-                            <TextBlock Text="Бридж"
+                            <TextBlock Text="Трагус/антитрагус"
                 Style="{StaticResource TitleObject}"/>
-                            <Image Source="/Images/GalleryImagesPirsing/Bridge.jpg" 
+                            <Image Source="/Images/EEPirs/5.png"  
              Style="{StaticResource PfotoContainer}"
              Margin=" 0 15 0 0">
                                 <Image.RenderTransform>
                                     <ScaleTransform ScaleX="1" ScaleY="1"/>
                                 </Image.RenderTransform>
                             </Image>
-                            <TextBlock Text="прокол переносицы"
+                            <TextBlock Text="прокол козелка/хряща напротив козелка."
                 Style="{StaticResource Topic}"
                 Margin="15"/>
                         </StackPanel>
                         <StackPanel Grid.Row="1" Grid.Column="2"
+             Orientation="Vertical">
+                            <TextBlock Text="Дейс"
+                Style="{StaticResource TitleObject}"/>
+                            <Image Source="/Images/EEPirs/6.png"  
+             Style="{StaticResource PfotoContainer}"
+             Margin=" 0 15 0 0">
+                                <Image.RenderTransform>
+                                    <ScaleTransform ScaleX="1" ScaleY="1"/>
+                                </Image.RenderTransform>
+                            </Image>
+                            <TextBlock Text="прокол хряща над ушным отверстием."
+                Style="{StaticResource Topic}"
+                Margin="15"/>
+                        </StackPanel>
+                        <StackPanel Grid.Row="2" Grid.Column="0"
 Orientation="Vertical">
-                            <TextBlock Text="Бридж"
+                            <TextBlock Text="Индастриал"
    Style="{StaticResource TitleObject}"/>
-                            <Image Source="/Images/GalleryImagesPirsing/Bridge.jpg" 
+                            <Image Source="/Images/EEPirs/7.png" 
 Style="{StaticResource PfotoContainer}"
 Margin=" 0 15 0 0">
                                 <Image.RenderTransform>
                                     <ScaleTransform ScaleX="1" ScaleY="1"/>
                                 </Image.RenderTransform>
                             </Image>
-                            <TextBlock Text="прокол переносицы"
+                            <TextBlock Text="двойной прокол завитка 
+                                       бокового хряща."
    Style="{StaticResource Topic}"
    Margin="15"/>
                         </StackPanel>
-
-
-
                     </Grid>
                 </Grid>
             </Border>

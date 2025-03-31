@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static Amalgama.Core.Navigation;
 
 namespace Amalgama.View.Pages
 {
@@ -29,6 +30,11 @@ namespace Amalgama.View.Pages
         {
             Application.Current.Shutdown();
 
+        }
+
+        private void ArrowBut_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            CoreNavigate.NavigatorCore.Navigate(new Pirsing());
         }
     }
 }
