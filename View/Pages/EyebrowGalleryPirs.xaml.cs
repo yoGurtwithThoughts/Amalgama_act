@@ -24,5 +24,10 @@ namespace Amalgama.View.Pages
         {
             InitializeComponent();
         }
+
+        private void Close_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
     }
 }

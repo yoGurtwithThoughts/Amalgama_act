@@ -1,6 +1,9 @@
-﻿using System;
+﻿using Amalgama.Servis;
+using Microsoft.Data.Sqlite;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +26,7 @@ namespace Amalgama.View.Pages
     /// </summary>
     public partial class RecordPage : Page
     {
+        private string selectedMaster = "Не указан"; // Переменная для хранения выбранного мастера
         private DispatcherTimer _timer;
         public RecordPage()
         {
@@ -210,21 +214,72 @@ namespace Amalgama.View.Pages
 
             _timer.Start();
         }
+      
 
+       
         private void RecSucces_Click(object sender, RoutedEventArgs e)
         {
-            MessageTextBlock.Text = "Вы успешно записанны!";
+            string dbPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "database.db");
+
+            // Создание и инициализация базы данных
+            DatabaseManager dbManager = new DatabaseManager(dbPath);
+            dbManager.InitializeDatabase(); // Удаляем старую таблицу и создаем новую
+
+            using (SQLiteConnection conn = new SQLiteConnection($"Data Source={dbPath};Version=3;"))
+            {
+                conn.Open();
+
+                // Проверка и обработка введенных данных
+                string fullName = Txt.Text == "Фамилия имя" || string.IsNullOrWhiteSpace(Txt.Text) ? "Не указано" : Txt.Text;
+                string phoneNumber = Txt1.Text == "Номер телефона" || string.IsNullOrWhiteSpace(Txt1.Text) ? "Не указан" : Txt1.Text;
+                string description = Txt2.Text == "Опишите желаемый результат" || string.IsNullOrWhiteSpace(Txt2.Text) ? "Без описания" : Txt2.Text;
+
+                // Определение цвета
+                string color = ColorTatoo.IsPressed ? "Цветная" : Mono.IsPressed ? "Ч/Б" : "Не указан";
+
+                // Получение имени мастера
+                string master = selectedMaster; // Переменная, которая хранит имя выбранного мастера
+
+                // Получение введённой пользователем даты
+                string date = TxtDate.Text; // Получаем дату из текстового поля
+
+                // Вставка данных
+                string query = "INSERT INTO Records (FullName, PhoneNumber, Color, Description, Master, Date) VALUES (@FullName, @PhoneNumber, @Color, @Description, @Master, @Date)";
+
+                using (SQLiteCommand cmd = new SQLiteCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@FullName", fullName);
+                    cmd.Parameters.AddWithValue("@PhoneNumber", phoneNumber);
+                    cmd.Parameters.AddWithValue("@Color", color);
+                    cmd.Parameters.AddWithValue("@Description", description);
+                    cmd.Parameters.AddWithValue("@Master", master); // Добавлено имя мастера
+                    cmd.Parameters.AddWithValue("@Date", date); // Добавлено введенное пользователем значение даты
+                    cmd.ExecuteNonQuery();
+                }
+            }
+
+            MessageTextBlock.Text = "Вы успешно записаны!";
             MessageTextBlock.Visibility = Visibility.Visible;
-
-
             _timer.Start();
         }
+        private void SelectM_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            selectedMaster = "Лаура"; // Имя мастера
+        }
 
+        private void Select1M_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            selectedMaster = "Никита"; // Имя мастера
+        }
         private void Txt3_MouseDown(object sender, MouseButtonEventArgs e)
         {
 
         }
-       
+
+        private void TxtDate_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
     }
 }
     

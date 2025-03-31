@@ -74,7 +74,8 @@
                        HorizontalAlignment="Center"
                        VerticalAlignment="Top"/>
             </Grid>
-            <Grid Grid.Column="1">
+            <Grid Grid.Column="1"
+                  Grid.Row="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="25"/>
                     <RowDefinition Height="*" />
@@ -110,7 +111,7 @@
                                         FontSize="25"
                                         Style="{StaticResource ButtonSt1}"
                                         Width="250"
-                                        Height="50"/>   
+                                        Height="50"/>
                                 <Button Content="Мастера" 
                                         Margin="16" 
                                         x:Name="Masters" 
@@ -138,6 +139,97 @@
                     </materialDesign:DrawerHost.RightDrawerContent>
                 </materialDesign:DrawerHost>
             </Grid>
+            <!--Данные о записях-->
+            <DataGrid x:Name="RecordsDataGrid" 
+                      AutoGenerateColumns="False" 
+                      HeadersVisibility="Column" 
+                      CanUserAddRows="False"
+                      Panel.ZIndex="-5"
+                      Grid.Column="1"
+                      Margin="0 85 0 0"
+                      Grid.ColumnSpan="3"
+                      RowHeight="50"  
+                      BorderBrush="#A1A1A1"
+                      BorderThickness="1"
+                      HorizontalAlignment="Stretch"
+                      VerticalAlignment="Stretch">  
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Мастер" 
+                            Binding="{Binding Master}" 
+                            Width="*" 
+                            ElementStyle="{StaticResource OtherTxt}" />
+                    <DataGridTextColumn Header="Дата" 
+                            Binding="{Binding Date}"
+                            Width="*" 
+                            ElementStyle="{StaticResource OtherTxt}" />
+                    <DataGridTextColumn Header="ФИО Клиента" 
+                            Binding="{Binding FullName}" 
+                            Width="*" 
+                            ElementStyle="{StaticResource OtherTxt}" />
+                    <DataGridTextColumn Header="Номер телефона" 
+                            Binding="{Binding PhoneNumber}" 
+                            Width="*" 
+                            ElementStyle="{StaticResource OtherTxt}" />
+                    <DataGridTextColumn Header="Цвет" 
+                            Binding="{Binding Color}" 
+                            Width="*"
+                            ElementStyle="{StaticResource OtherTxt}" />
+                    <DataGridTextColumn Header="Желаемый результат"
+                            Binding="{Binding Description}"
+                            Width="*" 
+                            ElementStyle="{StaticResource OtherTxt}" />
+                </DataGrid.Columns>
+
+                <DataGrid.CellStyle>
+                    <Style TargetType="DataGridCell">
+                        <Setter Property="Padding" Value="10"/>
+                        <Setter Property="TextBlock.TextWrapping" Value="Wrap"/>
+                        <!-- Включение переноса текста -->
+                        <Setter Property="VerticalAlignment" Value="Center"/>
+                        <!-- Центрирование текста по вертикали -->
+                        <Setter Property="HorizontalAlignment" Value="Center"/>
+                        <!-- Центрирование текста по горизонтали -->
+                        <Setter Property="BorderBrush" Value="#A1A1A1"/>
+                        <Setter Property="BorderThickness" Value="1"/>
+                        <!-- Установка границ ячеек -->
+                    </Style>
+                </DataGrid.CellStyle>
+
+                <DataGrid.RowStyle>
+                    <Style TargetType="DataGridRow">
+                        <Setter Property="BorderBrush" Value="#A1A1A1"/>
+                        <Setter Property="BorderThickness" Value="1"/>
+                        <!-- Нижняя граница для строк -->
+                    </Style>
+                </DataGrid.RowStyle>
+
+                <DataGrid.ColumnHeaderStyle>
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="FontFamily" Value="pack://application:,,,/Amalgama;component/Fonts/#Jura"/>
+                        <Setter Property="Foreground" Value="Black"/>
+                        <Setter Property="BorderBrush" Value="#A1A1A1"/>
+                        <Setter Property="BorderThickness" Value="1"/>
+                        <!-- Граница для заголовка -->
+                        <Setter Property="FontWeight" Value="Bold"/>
+                        <Setter Property="FontSize" Value="25"/>
+                        <!-- Убираем серую заливку -->
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="DataGridColumnHeader">
+                                    <Border Background="{TemplateBinding Background}" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                                        <TextBlock Text="{Binding}" 
+                                       TextWrapping="Wrap" 
+                                       VerticalAlignment="Center" 
+                                       HorizontalAlignment="Center" />
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </DataGrid.ColumnHeaderStyle>
+            </DataGrid>
         </Grid>
     </ScrollViewer>
 </Page>

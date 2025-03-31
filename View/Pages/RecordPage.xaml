@@ -233,10 +233,10 @@ HorizontalAlignment="Center">
                             </Grid>
                             <Grid Grid.Row="1">
                                 <TextBox Style="{StaticResource TextBoxStyle}"
-            x:Name="Txt3"
+            x:Name="TxtDate"
              Text="Выберите дату"
               Margin="13 0 0 0"
-            MouseDown="Txt3_MouseDown"
+            MouseDown="TxtDate_MouseDown"
          />
                             </Grid>
                         </Grid>

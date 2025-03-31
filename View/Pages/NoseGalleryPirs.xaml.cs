@@ -72,6 +72,10 @@ namespace Amalgama.View.Pages
                 GalleryGrid.Children.Add(stackPanel);
             }
         }
-    
-}
+
+        private void Close_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+    }
 }
