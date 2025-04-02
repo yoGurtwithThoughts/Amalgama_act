@@ -86,8 +86,23 @@ namespace Amalgama.View.Pages
             _timer.Start();
         }
 
+        private void HideAllMasters()
+        {
+            // Скрываем всех мастеров
+            TattooMasters.Visibility = Visibility.Collapsed;
+            TattooMastersText.Visibility = Visibility.Collapsed;
+
+            PiercingMasters.Visibility = Visibility.Collapsed;
+            PiercingMastersText.Visibility = Visibility.Collapsed;
+
+            RemoveTattooMasters.Visibility = Visibility.Collapsed;
+            RemoveTattooMastersText.Visibility = Visibility.Collapsed;
+        }
+
         private void Tatoo_Click(object sender, RoutedEventArgs e)
         {
+            HideAllMasters(); // Сначала скрываем всех мастеров
+
             Tatoo.Background = new SolidColorBrush(Color.FromRgb(135, 0, 0));
             Pirc.Background = new SolidColorBrush(Colors.Transparent);
             Remove.Background = new SolidColorBrush(Colors.Transparent);
@@ -95,16 +110,25 @@ namespace Amalgama.View.Pages
             Tatoo.Foreground = new SolidColorBrush(Colors.White);
             Pirc.Foreground = new SolidColorBrush(Colors.Black);
             Remove.Foreground = new SolidColorBrush(Colors.Black);
-            MessageTextBlock.Text = "Вы выбрали тату";
+
+            MessageTextBlock.Text = "Вы выбрали мастера Maria";
             MessageTextBlock.Visibility = Visibility.Visible;
 
+            // Показываем мастеров для татуировки
+            TattooMasters.Visibility = Visibility.Visible;
+            TattooMastersText.Visibility = Visibility.Visible;
+
+            RemoveTattooMasters.Visibility = Visibility.Visible;
+            RemoveTattooMastersText.Visibility = Visibility.Visible;
+            RemoveTattooMasters.Margin = new Thickness(25, 0, 0, 0);
 
             _timer.Start();
-
         }
 
         private void Pirc_Click(object sender, RoutedEventArgs e)
         {
+            HideAllMasters();
+
             Pirc.Background = new SolidColorBrush(Color.FromRgb(95, 0, 0));
             Tatoo.Background = new SolidColorBrush(Colors.Transparent);
             Remove.Background = new SolidColorBrush(Colors.Transparent);
@@ -112,15 +136,21 @@ namespace Amalgama.View.Pages
             Pirc.Foreground = new SolidColorBrush(Colors.White);
             Tatoo.Foreground = new SolidColorBrush(Colors.Black);
             Remove.Foreground = new SolidColorBrush(Colors.Black);
+
             MessageTextBlock.Text = "Вы выбрали пирсинг";
             MessageTextBlock.Visibility = Visibility.Visible;
 
+            // Показываем мастера для пирсинга
+            PiercingMasters.Visibility = Visibility.Visible;
+            PiercingMastersText.Visibility = Visibility.Visible;
 
             _timer.Start();
         }
 
         private void Remove_Click(object sender, RoutedEventArgs e)
         {
+            HideAllMasters();
+
             Remove.Background = new SolidColorBrush(Color.FromRgb(95, 0, 0));
             Tatoo.Background = new SolidColorBrush(Colors.Transparent);
             Pirc.Background = new SolidColorBrush(Colors.Transparent);
@@ -128,12 +158,15 @@ namespace Amalgama.View.Pages
             Remove.Foreground = new SolidColorBrush(Colors.White);
             Pirc.Foreground = new SolidColorBrush(Colors.Black);
             Tatoo.Foreground = new SolidColorBrush(Colors.Black);
+
             MessageTextBlock.Text = "Вы выбрали сведение татуировки";
             MessageTextBlock.Visibility = Visibility.Visible;
 
-
+            // Показываем мастера для сведения татуировки
+            RemoveTattooMasters.Visibility = Visibility.Visible;
+            RemoveTattooMastersText.Visibility = Visibility.Visible;
+            RemoveTattooMasters.Margin = new Thickness(0);
             _timer.Start();
-
         }
 
         private void Txt_MouseDown(object sender, MouseButtonEventArgs e)
@@ -197,26 +230,33 @@ namespace Amalgama.View.Pages
             }
         }
 
-        private void MastersSelect_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            MessageTextBlock.Text = "Вы выбрали мастра Laura";
-            MessageTextBlock.Visibility = Visibility.Visible;
-
-
-            _timer.Start();
-        }
+       
 
         private void MastersSelect1_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            MessageTextBlock.Text = "Вы выбрали мастра Nikita";
+            MessageTextBlock.Text = "Вы выбрали мастра Angelina";
             MessageTextBlock.Visibility = Visibility.Visible;
 
 
             _timer.Start();
         }
-      
+        private void MastersSelect2_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            MessageTextBlock.Text = "Вы выбрали мастра Arisha";
+            MessageTextBlock.Visibility = Visibility.Visible;
 
-       
+
+            _timer.Start();
+        }
+        private void MastersSelect3_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            MessageTextBlock.Text = "Вы выбрали мастра Arisha";
+            MessageTextBlock.Visibility = Visibility.Visible;
+
+
+            _timer.Start();
+        }
+
         private void RecSucces_Click(object sender, RoutedEventArgs e)
         {
             string dbPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "database.db");
@@ -264,12 +304,16 @@ namespace Amalgama.View.Pages
         }
         private void SelectM_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            selectedMaster = "Лаура"; // Имя мастера
+            selectedMaster = "Arisha"; // Имя мастера
         }
 
         private void Select1M_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            selectedMaster = "Никита"; // Имя мастера
+            selectedMaster = "Maria"; // Имя мастера
+        }
+        private void Select2M_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            selectedMaster = "Angelina"; // Имя мастера
         }
         private void Txt3_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -277,6 +321,11 @@ namespace Amalgama.View.Pages
         }
 
         private void TxtDate_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void TattooMasters_MouseDown(object sender, MouseButtonEventArgs e)
         {
 
         }

@@ -233,65 +233,84 @@ HorizontalAlignment="Center">
                             </Grid>
                             <Grid Grid.Row="1">
                                 <TextBox Style="{StaticResource TextBoxStyle}"
-            x:Name="TxtDate"
-             Text="Выберите дату"
-              Margin="13 0 0 0"
-            MouseDown="TxtDate_MouseDown"
-         />
+                                            x:Name="TxtDate"
+                                            Text="Выберите дату"
+                                            Margin="13 0 0 0"
+                                            MouseDown="TxtDate_MouseDown"/>
                             </Grid>
                         </Grid>
                     </StackPanel>
                 </Grid>
                 <Grid Grid.Row="8">
-                    <StackPanel Orientation="Horizontal"
+                    <StackPanel Orientation="Vertical"
                                 Height="150"
                                 Width="400"
-                                >
-                        <Grid HorizontalAlignment="Center">
+                                HorizontalAlignment="Center">
+                        <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="30"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
+                            <!-- Заголовок -->
                             <Grid Grid.Row="0">
                                 <TextBlock Text="Выбрать мастера:"
                                            Style="{StaticResource OtherTitle}"
                                            Margin="10.75 8.5 0 0"/>
                             </Grid>
+                            <!-- Контейнер для мастеров -->
                             <Grid Grid.Row="1">
-                                <StackPanel Orientation="Horizontal"
+                                <StackPanel x:Name="MastersPanel"
+                                            Orientation="Horizontal"
                                             HorizontalAlignment="Center"
                                             VerticalAlignment="Center"
-                                             Margin="70 0 0 0">
-                                    <StackPanel>
-                                        <Border x:Name="MastersSelect"
-                                MouseDown="MastersSelect_MouseDown"
-                            Style="{StaticResource MastersPfoto}">
-                                            <Image Source="/Images/laura.jpg"
-                                                   HorizontalAlignment="Center"
-                               Stretch="UniformToFill"
-                               />
+                                            Margin="20 0 0 0">
+                                    <!-- Мастер 1 (Тату) -->
+                                    <StackPanel x:Name="TattooMasters" Visibility="Collapsed">
+                                        <Border MouseDown="MastersSelect3_MouseDown"
+                                                Style="{StaticResource MastersPfoto}">
+                                            <Image Source="/Images/MMaria.png"
+                                                   Stretch="UniformToFill"
+                                                   HorizontalAlignment="Center"/>
                                         </Border>
-                                        <Image Source="/Images/laura.png" 
-                                               
-                                           Height="10"
-                                              Margin="0 5.75 0 0"
-                                           Stretch="Uniform"/>
-                                    </StackPanel>
-                                    <StackPanel Width="35"></StackPanel>
-                                    <StackPanel>
-                                        <Border x:Name="MastersSelect1"
-         MouseDown="MastersSelect1_MouseDown"
-     Style="{StaticResource MastersPfoto}">
-                                            <Image Source="/Images/Nikita.jpg" 
-Stretch="UniformToFill"
-                                                   HorizontalAlignment="Center"
-/>
-                                        </Border>
-                                        <Image Source="/Images/NIKITA.png"
+                                        <Image x:Name="TattooMastersText"
+                                               Source="/Images/Maria.png"
                                                HorizontalAlignment="Center"
-   Height="10"
-      Margin="0 5.75 0 0"
-   Stretch="Uniform"/>
+                                               Height="10"
+                                               Margin="0 5.75 0 0"
+                                               Stretch="Uniform"
+                                               Visibility="Collapsed"/>
+                                    </StackPanel>
+                                    <!-- Мастер (Пирсинг) -->
+                                    <StackPanel x:Name="PiercingMasters" Visibility="Collapsed">
+                                        <Border MouseDown="MastersSelect1_MouseDown"
+                                                Style="{StaticResource MastersPfoto}">
+                                            <Image Source="/Images/MAngelina.png"
+                                                   Stretch="UniformToFill"
+                                                   HorizontalAlignment="Center"/>
+                                        </Border>
+                                        <Image x:Name="PiercingMastersText"
+                                               Source="/Images/Angelina.png"
+                                               HorizontalAlignment="Center"
+                                               Height="10"
+                                               Margin="0 5.75 0 0"
+                                               Stretch="Uniform"
+                                               Visibility="Collapsed"/>
+                                    </StackPanel>
+                                    <!-- Мастер (Сведение тату) -->
+                                    <StackPanel x:Name="RemoveTattooMasters" Visibility="Collapsed">
+                                        <Border MouseDown="MastersSelect2_MouseDown"
+                                                Style="{StaticResource MastersPfoto}">
+                                            <Image Source="/Images/MArisha.png"
+                                                   Stretch="UniformToFill"
+                                                   HorizontalAlignment="Center"/>
+                                        </Border>
+                                        <Image x:Name="RemoveTattooMastersText"
+                                               Source="/Images/Arisha.png"
+                                               HorizontalAlignment="Center"
+                                               Height="10"
+                                               Margin="0 5.75 0 0"
+                                               Stretch="Uniform"
+                                               Visibility="Collapsed"/>
                                     </StackPanel>
                                 </StackPanel>
                             </Grid>
@@ -299,13 +318,12 @@ Stretch="UniformToFill"
                     </StackPanel>
                 </Grid>
                 <Grid Grid.Row="9">
-                    <Button x:Name="RecSucces"
+                        <Button x:Name="RecSucces"
                             Click="RecSucces_Click"
                             Style="{StaticResource ButtonSt1}"
                             Content="ЗАПИСАТЬСЯ"></Button>
+                    </Grid>
                 </Grid>
-            </Grid>
-
             <Grid Grid.Column="4">
                 <Grid.Background>
                     <LinearGradientBrush StartPoint="0.5,0.5" EndPoint="0.5,0.5">
@@ -320,14 +338,11 @@ Stretch="UniformToFill"
                                Stretch="Fill"
                                Height="15"
                                Width="15"
-                           VerticalAlignment="Top"
-                           HorizontalAlignment="Center"
-                           MouseDown="Imageclosed_MouseDown"/>
+                               VerticalAlignment="Top"
+                               HorizontalAlignment="Center"
+                               MouseDown="Imageclosed_MouseDown"/>
             </Grid>
-
-
         </Grid>
-
     </Border>
 </Page> 
   
